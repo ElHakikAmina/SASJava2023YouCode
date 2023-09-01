@@ -1,0 +1,34 @@
+-- Créer la base de données de bibliothèque
+ CREATE DATABASE Bibliotheque;
+
+-- Utiliser la base de données
+USE Bibliotheque;
+
+
+
+-- Table pour les livres
+CREATE TABLE Livres (
+    ISBN VARCHAR(13) PRIMARY KEY,
+    Titre VARCHAR(255) NOT NULL,
+    Auteur VARCHAR(255),
+   quantite int
+);
+
+-- Table pour les emprunteurs
+CREATE TABLE Emprunteurs (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nom_complet VARCHAR(255) NOT NULL,
+    NumTel int,
+    Adresse VARCHAR(255)
+);
+
+-- Table pour les transactions d'emprunt
+CREATE TABLE Emprunts (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    LivreISBN VARCHAR(13),
+    EmprunteurID INT,
+    DateEmprunt DATE,
+    DateRetour DATE,
+    FOREIGN KEY (LivreISBN) REFERENCES Livres(ISBN),
+    FOREIGN KEY (EmprunteurID) REFERENCES Emprunteurs(ID)
+);
