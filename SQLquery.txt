@@ -1,0 +1,34 @@
+
+ CREATE DATABASE Bibliotheque;
+
+
+USE Bibliotheque;
+
+
+
+
+CREATE TABLE Livres (
+    ISBN VARCHAR(13) PRIMARY KEY,
+    Titre VARCHAR(255) NOT NULL,
+    Auteur VARCHAR(255),
+   quantite int
+);
+
+
+CREATE TABLE Emprunteurs (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nom_complet VARCHAR(255) NOT NULL,
+    NumTel int,
+    Adresse VARCHAR(255)
+);
+
+
+CREATE TABLE Emprunts (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    LivreISBN VARCHAR(13),
+    EmprunteurID INT,
+    DateEmprunt DATE,
+    DateRetour DATE,
+    FOREIGN KEY (LivreISBN) REFERENCES Livres(ISBN),
+    FOREIGN KEY (EmprunteurID) REFERENCES Emprunteurs(ID)
+);
