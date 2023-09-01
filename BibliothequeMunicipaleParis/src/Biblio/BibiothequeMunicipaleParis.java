@@ -33,17 +33,6 @@ public class BibliothequeMunicipaleParis {
          
          
           afficherMenu();
-         
-    	
-        
-    	
-    	
-    	
-    	 
-        
-    	
-    	
-    	
-    	
+       
     }
 }
