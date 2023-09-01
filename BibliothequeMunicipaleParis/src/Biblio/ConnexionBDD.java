@@ -7,18 +7,17 @@ import java.sql.SQLException;
 public class ConnexionBDD {
 
 	
-		String url = "jdbc:mysql://localhost:3307/Bibliotheque"; 
-        String utilisateur = "root"; 
-        String motDePasse = "1234"; 
+		private static final String url = "jdbc:mysql://localhost:3307/Bibliotheque"; 
+        private static final String utilisateur = "root"; 
+        private static final String motDePasse = "1234"; 
 
-        try {
-            Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-//System.out.println("gg");
-
-            connexion.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        public static Connection seConnecterDB() throws SQLException {
+            return DriverManager.getConnection(url, utilisateur, motDePasse);
         }
-
-	
+       
+        public static void fermerConnexion(Connection connexion) throws SQLException {
+            if (connexion != null) {
+                connexion.close();
+            }
+        }
 }
