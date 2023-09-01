@@ -19,17 +19,24 @@ public class BibliothequeMunicipaleParis {
     }
     public static void main(String[] args) {
         
-
-         int pwd=1234;
-         Scanner scanner = new Scanner(System.in);
-         
+         String pwd="1234";
+         Scanner scanner = new Scanner(System.in); 
          
          System.out.println("Mot e passe: ");
-    	 int p = scanner.nextInt();
-         while(pwd != p) {
+    	 String pwsSaisi = scanner.nextLine();
+         while(!pwd.equals(pwsSaisi)) {
         	 System.out.println("Mot e passe: ");
-        	  p = scanner.nextInt();
+        	 pwsSaisi = scanner.nextLine();
          }
-          afficherMenu();
+         String choix;
+         afficherMenu(); 
+         System.out.println("donner votre choix: ");
+         choix=scanner.nextLine();
+         while(choix.equals("0"))
+         {
+        	 afficherMenu(); 
+             System.out.println("donner votre choix: ");
+             choix=scanner.nextLine();
+         }
     }
 }
