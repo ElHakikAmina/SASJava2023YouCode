@@ -17,7 +17,7 @@ public class BibliothequeMunicipaleParis {
         System.out.println("0. Quitter");
         System.out.print("Choisissez une option : ");
     }
-    //public static void main(String[] args) {
+    public static void main(String[] args) {
          int pwd=1234;
          Scanner scanner = new Scanner(System.in);
          
@@ -29,5 +29,5 @@ public class BibliothequeMunicipaleParis {
         	  p = scanner.nextInt();
          }
           afficherMenu();
- //   }
+    }
 }
