@@ -15,7 +15,7 @@ public class Livre {
 	protected static void afficherTousLesLivres() {
         try {
             Connection connexion = ConnexionBDD.seConnecterDB();
-            String query = "SELECT * FROM livre"; // Assurez-vous que la table s'appelle "Livres" dans votre base de données
+            String query = "SELECT * FROM livre"; 
 
             PreparedStatement preparedStatement = connexion.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
