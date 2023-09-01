@@ -18,8 +18,23 @@ public class BibliothequeMunicipaleParis {
         System.out.print("Choisissez une option : ");
     }
     public static void main(String[] args) {
+         int pwd=1234;
+         Scanner scanner = new Scanner(System.in);
+         
+         
+         System.out.println("Mot e passe: ");
+    	 int p = scanner.nextInt();
+         while(pwd != p) {
+        	 System.out.println("Mot e passe: ");
+        	  p = scanner.nextInt();
+         }
+         
         
-    	afficherMenu();
+         
+         
+          afficherMenu();
+         
+    	
         
     	
     	
