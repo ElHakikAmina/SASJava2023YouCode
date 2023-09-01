@@ -26,14 +26,12 @@ public class Livre {
                 String titre = resultSet.getString("titre");
                 String auteur = resultSet.getString("auteur");
                 int quantite = resultSet.getInt("quantite");
-                // Vous pouvez ajouter d'autres colonnes ici selon votre schéma de base de données
 
                 
                 System.out.println("ISBN: " + isbn);
                 System.out.println("Titre: " + titre);
                 System.out.println("Auteur: " + auteur);
                 System.out.println("Quantite: " + quantite);
-                // Affichez d'autres informations si nécessaire
                 System.out.println();
             }
 

@@ -15,10 +15,10 @@ public class BibliothequeMunicipaleParis {
         System.out.println("8. Modifier les informations d'un livre");
         System.out.println("9. Statistique");
         System.out.println("0. Quitter");
-        System.out.print("Choisissez une option : ");
+        
     }
     public static void main(String[] args) {
-        Livre.afficherTousLesLivres();
+        
          String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
@@ -32,8 +32,13 @@ public class BibliothequeMunicipaleParis {
          afficherMenu(); 
          System.out.println("donner votre choix: ");
          choix=scanner.nextLine();
-         while(choix.equals("0"))
+         while(!choix.equals("0"))
          {
+        	 switch (choix)
+        	 {
+        	 case "2":Livre.afficherTousLesLivres();break;
+        	 }
+        		 
         	 afficherMenu(); 
              System.out.println("donner votre choix: ");
              choix=scanner.nextLine();
