@@ -1,5 +1,7 @@
 package Biblio;
 
+import java.util.Scanner;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +15,24 @@ public class Livre {
 	private String titre; 
 	private String auteur; 
 	private int quantite;
+	
+	 private static Scanner scanner = new Scanner(System.in);
+	//
+	protected  void saisi()
+	{
+		System.out.println("Saisissez l'ISBN du livre : ");
+        this.ISBN = scanner.nextLine();
+
+        System.out.println("Saisissez le titre du livre : ");
+        String titre = scanner.nextLine();
+
+        System.out.println("Saisissez l'auteur du livre : ");
+        String auteur = scanner.nextLine();
+
+        System.out.println("Saisissez la quantité du livre : ");
+        int quantite = scanner.nextInt();
+	}
+	
 	//
 	
 	protected static void afficherTousLesLivres() {
