@@ -23,8 +23,7 @@ public class BibliothequeMunicipaleParis {
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
-         Livre livre = new Livre();
-         livre.saisi();
+         
 
          //Livre.ajouterLivre(ISBN, titre, auteur, quantite);
     	
@@ -50,6 +49,8 @@ public class BibliothequeMunicipaleParis {
          {
         	 switch (choix)
         	 {
+        	 case "1": Livre livre = new Livre();
+             livre.saisi();break;
         	 case "2":Livre.afficherTousLesLivres();break;
         	 }
         		 
