@@ -19,10 +19,33 @@ public class BibliothequeMunicipaleParis {
         
     }
     public static void main(String[] args) {
-        Livre.ajouterLivre("1234567890", "Titre du livre", "Auteur du livre", 5);
-
-         String pwd="1234";
+    	
+    	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
+         
+    	
+    	 System.out.println("Saisissez l'ISBN du livre : ");
+         String ISBN = scanner.nextLine();
+
+         System.out.println("Saisissez le titre du livre : ");
+         String titre = scanner.nextLine();
+
+         System.out.println("Saisissez l'auteur du livre : ");
+         String auteur = scanner.nextLine();
+
+         System.out.println("Saisissez la quantité du livre : ");
+         int quantite = scanner.nextInt();
+
+         // Appel de la méthode pour ajouter un livre en utilisant les données saisies par l'utilisateur
+         Livre.ajouterLivre(ISBN, titre, auteur, quantite);
+    	
+    	
+    	
+    	
+    	
+        //Livre.ajouterLivre("1234567890", "Titre du livre", "Auteur du livre", 5);
+
+        
          
          System.out.println("Mot e passe: ");
     	 String pwsSaisi = scanner.nextLine();
