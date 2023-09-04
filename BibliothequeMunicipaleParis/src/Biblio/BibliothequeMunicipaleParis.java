@@ -23,18 +23,7 @@ public class BibliothequeMunicipaleParis {
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
-         
-
-         //Livre.ajouterLivre(ISBN, titre, auteur, quantite);
-    	
-    	
-    	
-    	
-    	
-        //Livre.ajouterLivre("1234567890", "Titre du livre", "Auteur du livre", 5);
-
-        
-         
+                  
          System.out.println("Mot e passe: ");
     	 String pwsSaisi = scanner.nextLine();
          while(!pwd.equals(pwsSaisi)) {

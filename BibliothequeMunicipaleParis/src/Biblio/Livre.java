@@ -24,10 +24,25 @@ public class Livre {
 		 
 	 }
 	 
-	/* public Livre(String ISBN, String titre, String auteur, int quantite) {
-		 
-		 
-	 }*/
+	 //
+	 
+	
+
+	 public void afficherListeLivresDisponibles() {}
+	
+	 public void rechercjerLivre() {}
+	
+	 public void emprunter() {}
+	
+	 public void retourneLivre() {}
+	
+	 public void afficherLivresEmpruntés() {}
+	
+	 public void supprimerLivre() {}
+	 
+	 public void modifierInfoLivre () {}
+	 
+	 public void statistique() {}
 	 
 	 //
 	protected  void saisi()
