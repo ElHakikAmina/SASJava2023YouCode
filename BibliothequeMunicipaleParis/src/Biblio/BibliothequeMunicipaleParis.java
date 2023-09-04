@@ -24,7 +24,7 @@ public class BibliothequeMunicipaleParis {
          Scanner scanner = new Scanner(System.in); 
          
          Livre livre = new Livre ();
-         livre.rechercherLivre();
+         
          
          System.out.println("Mot e passe: ");
     	 String pwsSaisi = scanner.nextLine();
@@ -40,9 +40,18 @@ public class BibliothequeMunicipaleParis {
          {
         	 switch (choix)
         	 {
-        	 case "1": 
-             livre.saisi();break;
+        	 //case "0":System.out.println("Bye");break;
+        	 case "1": livre.saisi();break;
         	 case "2":Livre.afficherTousLesLivres();break;
+        	 case "3":livre.rechercherLivre();break;
+        	 /*case "4":;break;
+        	 case "5":;break;
+        	 case "6":;break;
+        	 case "7":;break;
+        	 case "8":;break;
+        	 case "9":;break;
+        	 */
+        	 //default:break;
         	 }
         		 
         	 afficherMenu(); 
