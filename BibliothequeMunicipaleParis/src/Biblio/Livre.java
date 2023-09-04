@@ -220,9 +220,25 @@ public class Livre {
 	
 	 
 	
-	 public void supprimerLivre() {}
+	 public void supprimerLivre(String isbn) {
+		 try {
+			 Connection connection = ConnexionBDD.seConnecterDB();
+			 String query = "DELETE FROM livre WHERE ISBN= ? ";
+			 PreparedStatement preparedStatement= connection.prepareStatement(query);
+			  preparedStatement.setString(1,isbn);
+			  
+			  preparedStatement.executeUpdate();
+		 }catch (SQLException e){
+			 e.printStackTrace();
+		 }
+		
+		  
+	 }
 	 
-	 public void modifierInfoLivre () {}
+	 public void modifierInfoLivre (String isbn) {
+	
+		
+	 }
 	 
 	 
 	 

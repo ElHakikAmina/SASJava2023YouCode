@@ -20,6 +20,7 @@ public class BibliothequeMunicipaleParis {
     }
     public static void main(String[] args) {
     	Livre livre = new Livre ();
+    	livre.supprimerLivre("1");
     	System.out.println(livre.rechercherLivreParISBN("1khf"));
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
