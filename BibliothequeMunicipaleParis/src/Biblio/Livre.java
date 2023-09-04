@@ -221,6 +221,12 @@ public class Livre {
 	 
 	
 	 public void supprimerLivre(String isbn) {
+		 String confirmation;
+		 System.out.println("Etes vous sur de vouloir supprimer le livre ISBN = "+isbn);
+		 System.out.println("yes/non ** [ ATTENTION CETTE ETAPE EST IRREVERSIBLE] **");
+		 confirmation = scanner.nextLine();
+		 if (!confirmation.equals("yes")) System.out.println("supprission annulé");
+		 else if(confirmation.equals("yes"))
 		 try {
 			 Connection connection = ConnexionBDD.seConnecterDB();
 			 String query = "DELETE FROM livre WHERE ISBN= ? ";
@@ -228,14 +234,17 @@ public class Livre {
 			  preparedStatement.setString(1,isbn);
 			  
 			  preparedStatement.executeUpdate();
+			  System.out.println("le livre avec ISBN ="+isbn+" a bien été suprimé");
 		 }catch (SQLException e){
 			 e.printStackTrace();
 		 }
+		 
 		
 		  
 	 }
 	 
 	 public void modifierInfoLivre (String isbn) {
+		 
 	
 		
 	 }
