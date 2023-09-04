@@ -24,13 +24,13 @@ public class Livre {
         this.ISBN = scanner.nextLine();
 
         System.out.println("Saisissez le titre du livre : ");
-        String titre = scanner.nextLine();
+        this.titre = scanner.nextLine();
 
         System.out.println("Saisissez l'auteur du livre : ");
-        String auteur = scanner.nextLine();
+        this.auteur = scanner.nextLine();
 
         System.out.println("Saisissez la quantité du livre : ");
-        int quantite = scanner.nextInt();
+        this.quantite = scanner.nextInt();
 	}
 	
 	//
