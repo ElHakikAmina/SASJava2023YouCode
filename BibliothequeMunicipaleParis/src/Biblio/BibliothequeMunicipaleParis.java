@@ -23,8 +23,11 @@ public class BibliothequeMunicipaleParis {
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
-         Livre livre = new Livre ();
+         Emprunteur emprunteur = new Emprunteur();
+         emprunteur.ajoutEmprunteur("z",4,"h");
          
+         Livre livre = new Livre ();
+         EmpruntLivre empruntLivre = new EmpruntLivre();
          
          System.out.println("Mot e passe: ");
     	 String pwsSaisi = scanner.nextLine();
@@ -44,8 +47,12 @@ public class BibliothequeMunicipaleParis {
         	 case "1": livre.saisi();break;
         	 case "2":Livre.afficherTousLesLivres();break;
         	 case "3":livre.rechercherLivre();break;
-        	 /*case "4":;break;
-        	 case "5":;break;
+        	 case "4":
+        		 System.out.println("Saisissez l'ISBN du livre que vous souhaitez emprunter : ");
+        		    String isbnEmprunt = scanner.nextLine();
+        		    empruntLivre.emprunterLivre(isbnEmprunt);
+        		 ;break;
+        	 /*case "5":;break;
         	 case "6":;break;
         	 case "7":;break;
         	 case "8":;break;

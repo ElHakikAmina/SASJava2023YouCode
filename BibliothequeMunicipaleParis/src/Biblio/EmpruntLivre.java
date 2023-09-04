@@ -1,13 +1,18 @@
 package Biblio;
 
+import java.util.Date;
+
 public class EmpruntLivre {
 	 private int id;
 	 private String livre_ISBN;
 	 private int id_emprunteur;
-	 private date date_emprunt;
-	 private date date_retour;
+	 private Date date_emprunt;
+	 private Date date_retour;
 	 
-	 
+	 public void emprunterLivre(String isbn)
+	 {
+		 
+	 }
 	 public void afficherListeLivresDisponibles() {}
 	 
 	 public void retourneLivre() {}
