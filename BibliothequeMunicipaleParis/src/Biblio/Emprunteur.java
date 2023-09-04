@@ -5,4 +5,6 @@ public class Emprunteur {
 	private String nom_complet; 
 	private int numTel;  
 	private String adresse;
+	
+	 public void emprunter() {}
 }

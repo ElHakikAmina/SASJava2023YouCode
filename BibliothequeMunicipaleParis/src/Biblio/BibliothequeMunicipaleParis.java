@@ -23,7 +23,9 @@ public class BibliothequeMunicipaleParis {
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
-                  
+         Livre livre = new Livre ();
+         livre.rechercherLivre();
+         
          System.out.println("Mot e passe: ");
     	 String pwsSaisi = scanner.nextLine();
          while(!pwd.equals(pwsSaisi)) {
@@ -38,7 +40,7 @@ public class BibliothequeMunicipaleParis {
          {
         	 switch (choix)
         	 {
-        	 case "1": Livre livre = new Livre();
+        	 case "1": 
              livre.saisi();break;
         	 case "2":Livre.afficherTousLesLivres();break;
         	 }

@@ -28,21 +28,36 @@ public class Livre {
 	 
 	
 
-	 public void afficherListeLivresDisponibles() {}
+	 
 	
-	 public void rechercjerLivre() {}
+	 public void rechercherLivre() {
+		 String choix;
+		 System.out.println("chooisiser comment chercher");
+		 System.out.println("1- par titre");
+		 System.out.println("2 - par auteur");
+		 System.out.println("Donner votre choix: ");
+		 choix = scanner.nextLine();
+		 while(!choix.equals("1") && !choix.equals("2") )
+		 {
+			 System.out.println("chooisiser comment chercher");
+			 System.out.println("1- par titre");
+			 System.out.println("2 - par auteur");
+			 System.out.println("Donner votre choix: ");
+			 choix = scanner.nextLine();
+		 }
+	 }
 	
-	 public void emprunter() {}
 	
-	 public void retourneLivre() {}
 	
-	 public void afficherLivresEmpruntés() {}
+	
+	
+	 
 	
 	 public void supprimerLivre() {}
 	 
 	 public void modifierInfoLivre () {}
 	 
-	 public void statistique() {}
+	 
 	 
 	 //
 	protected  void saisi()
@@ -100,6 +115,7 @@ public class Livre {
 	public  void ajouterLivre(String ISBN, String titre, String auteur, int quantite) {
         try {
             Connection connexion = ConnexionBDD.seConnecterDB();
+            
             String query = "INSERT INTO livre (ISBN, titre, auteur, quantite) VALUES (?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connexion.prepareStatement(query);
