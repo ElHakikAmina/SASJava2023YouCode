@@ -31,7 +31,7 @@ public class Livre {
 	 
 	
 	 public void rechercherLivre() {
-		 String choix;
+		 String choix,titre,auteur;
 		 System.out.println("chooisiser comment chercher");
 		 System.out.println("1- par titre");
 		 System.out.println("2 - par auteur");
@@ -45,10 +45,83 @@ public class Livre {
 			 System.out.println("Donner votre choix: ");
 			 choix = scanner.nextLine();
 		 }
+		 
+		 if(choix.equals("1"))
+		 {
+			 System.out.println("donner le titre à chercher: ");
+			 titre = scanner.nextLine();
+			 rechercheParTitre( titre);
+		 }else if(choix.equals("2"))
+		 {
+			 System.out.println("donner l'auteur à chercher: ");
+			 auteur = scanner.nextLine();
+			 rechercheParAuteur( auteur);
+		 }
 	 }
 	
+	public void rechercheParTitre(String titreChercher)
+	{
+		 try {
+	            Connection connexion = ConnexionBDD.seConnecterDB();
+	            String query = "SELECT * FROM livre WHERE titre = ?";
+
+	            PreparedStatement preparedStatement = connexion.prepareStatement(query);
+	            preparedStatement.setString(1, titreChercher);
+
+	            ResultSet resultSet = preparedStatement.executeQuery();
+
+	            while (resultSet.next()) {
+	                String isbn = resultSet.getString("ISBN");
+	                String titre = resultSet.getString("titre");
+	                String auteur = resultSet.getString("auteur");
+	                int quantite = resultSet.getInt("quantite");
+
+	                System.out.println("ISBN: " + isbn);
+	                System.out.println("Titre: " + titre);
+	                System.out.println("Auteur: " + auteur);
+	                System.out.println("Quantité: " + quantite);
+	                System.out.println();
+	            }
+
+	            ConnexionBDD.fermerConnexion(connexion);
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	}
 	
-	
+	public void rechercheParAuteur(String auteurChercher)
+	{
+		try {
+		Connection connexion = ConnexionBDD.seConnecterDB();
+		String query = "SELECT * FROM livre where auteur = ? ";
+        PreparedStatement preparedStatement = connexion.prepareStatement(query);
+
+		preparedStatement.setString(1, auteurChercher);
+		
+        
+        ResultSet resultSet =  preparedStatement.executeQuery();
+        
+        while (resultSet.next()) {
+            String isbn = resultSet.getString("ISBN");
+            String titre = resultSet.getString("titre");
+            String auteur = resultSet.getString("auteur");
+            int quantite = resultSet.getInt("quantite");
+
+            System.out.println("ISBN: " + isbn);
+            System.out.println("Titre: " + titre);
+            System.out.println("Auteur: " + auteur);
+            System.out.println("Quantité: " + quantite);
+            System.out.println();
+        }
+
+        ConnexionBDD.fermerConnexion(connexion);
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+		
+}
 	
 	
 	 
@@ -84,6 +157,7 @@ public class Livre {
             Connection connexion = ConnexionBDD.seConnecterDB();
             String query = "SELECT * FROM livre"; 
 
+            
             PreparedStatement preparedStatement = connexion.prepareStatement(query);
             
             ResultSet resultSet = preparedStatement.executeQuery();
