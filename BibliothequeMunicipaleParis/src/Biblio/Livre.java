@@ -26,10 +26,90 @@ public class Livre {
 	 }
  
  
- 
-	 public void miseAJourQuantiteLivre(String isbn, int nvlquantite){}
-	 public void rechercherLivreParISBN(String isbn){}
+ public void miseAJourQuantiteLivre(String isbn, int nouvelleQuantite) {
+	    Connection connexion = null;
+	    PreparedStatement preparedStatement = null;
+
+	    try {
+	        connexion = ConnexionBDD.seConnecterDB();
+
+	        
+	        String query = "UPDATE livre SET quantite = ? WHERE ISBN = ?";
+
+	        preparedStatement = connexion.prepareStatement(query);
+	        preparedStatement.setInt(1, nouvelleQuantite);
+	        preparedStatement.setString(2, isbn);
+
+	        int rowsUpdated = preparedStatement.executeUpdate();
+
+	        if (rowsUpdated > 0) {
+	            System.out.println("La quantité du livre avec l'ISBN " + isbn + " a été mise à jour avec succès.");
+	        } else {
+	            System.out.println("La mise à jour de la quantité du livre a échoué.");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        
+	        if (preparedStatement != null) {
+	            try {
+	                preparedStatement.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        /*if (connexion != null) {
+	            ConnexionBDD.fermerConnexion(connexion);
+	        }*/
+	    }
+	}
+
+ public boolean rechercherLivreParISBN(String isbn) {
+	    try {
+	        Connection connexion = ConnexionBDD.seConnecterDB();
+	        String query = "SELECT * FROM livre WHERE ISBN = ?";
+
+	        PreparedStatement preparedStatement = connexion.prepareStatement(query);
+	        preparedStatement.setString(1, isbn);
+
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	            String isbnResult = resultSet.getString("ISBN");
+	            String titre = resultSet.getString("titre");
+	            String auteur = resultSet.getString("auteur");
+	            int quantite = resultSet.getInt("quantite");
+
+	            System.out.println("ISBN: " + isbnResult);
+	            System.out.println("Titre: " + titre);
+	            System.out.println("Auteur: " + auteur);
+	            System.out.println("Quantité: " + quantite);
+
+	            
+	            ConnexionBDD.fermerConnexion(connexion);
+	            return true;
+	        } else {
+	            System.out.println("Le livre avec l'ISBN " + isbn + " n'existe pas.");
+
+	            
+	            ConnexionBDD.fermerConnexion(connexion);
+	            return false;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        
+	        return false;
+	    }
+	}
+
+
 	
+ 
+ 
+ 
+ 
+ 
+ 
 	 
 	 //
 	 
@@ -38,17 +118,19 @@ public class Livre {
 	 
 	
 	 public void rechercherLivre() {
-		 String choix,titre,auteur;
+		 String choix,titre,auteur,isbn;
 		 System.out.println("chooisiser comment chercher");
 		 System.out.println("1- par titre");
 		 System.out.println("2 - par auteur");
+		 System.out.println("3 - par ISBN");
 		 System.out.println("Donner votre choix: ");
 		 choix = scanner.nextLine();
-		 while(!choix.equals("1") && !choix.equals("2") )
+		 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") )
 		 {
 			 System.out.println("chooisiser comment chercher");
 			 System.out.println("1- par titre");
 			 System.out.println("2 - par auteur");
+			 System.out.println("3 - par ISBN");
 			 System.out.println("Donner votre choix: ");
 			 choix = scanner.nextLine();
 		 }
@@ -63,6 +145,11 @@ public class Livre {
 			 System.out.println("donner l'auteur à chercher: ");
 			 auteur = scanner.nextLine();
 			 rechercheParAuteur( auteur);
+		 }else if(choix.equals("3"))
+		 {
+			 System.out.println("donner ISBN à chercher: ");
+			 isbn = scanner.nextLine();
+			 rechercherLivreParISBN( isbn);
 		 }
 	 }
 	

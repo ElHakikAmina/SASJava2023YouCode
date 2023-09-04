@@ -19,14 +19,16 @@ public class BibliothequeMunicipaleParis {
         
     }
     public static void main(String[] args) {
-    	
+    	Livre livre = new Livre ();
+    	System.out.println(livre.rechercherLivreParISBN("1khf"));
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
          Emprunteur emprunteur = new Emprunteur();
         // emprunteur.ajoutEmprunteur("z",4,"h");
          
-         Livre livre = new Livre ();
+         
+         livre.miseAJourQuantiteLivre("1", 10);
          EmpruntLivre empruntLivre = new EmpruntLivre();
          //empruntLivre.emprunterLivre();
          
