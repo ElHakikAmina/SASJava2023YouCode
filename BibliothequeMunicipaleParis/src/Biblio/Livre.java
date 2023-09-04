@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Connection;
 
 
+
 public class Livre {
 	private String ISBN; 
 	private String titre; 
@@ -18,6 +19,17 @@ public class Livre {
 	
 	 private static Scanner scanner = new Scanner(System.in);
 	//
+	 
+	 public Livre(){ 
+		 
+	 }
+	 
+	/* public Livre(String ISBN, String titre, String auteur, int quantite) {
+		 
+		 
+	 }*/
+	 
+	 //
 	protected  void saisi()
 	{
 		System.out.println("Saisissez l'ISBN du livre : ");
@@ -31,6 +43,8 @@ public class Livre {
 
         System.out.println("Saisissez la quantité du livre : ");
         this.quantite = scanner.nextInt();
+        
+        ajouterLivre(ISBN,titre,auteur,quantite);
 	}
 	
 	//
@@ -68,7 +82,7 @@ public class Livre {
 	
 	//
 	
-	public static void ajouterLivre(String ISBN, String titre, String auteur, int quantite) {
+	public  void ajouterLivre(String ISBN, String titre, String auteur, int quantite) {
         try {
             Connection connexion = ConnexionBDD.seConnecterDB();
             String query = "INSERT INTO livre (ISBN, titre, auteur, quantite) VALUES (?, ?, ?, ?)";
