@@ -3,6 +3,7 @@ package Biblio;
 import java.util.Scanner;
 
 public class BibliothequeMunicipaleParis {
+
 	public static void afficherMenu() {
         System.out.println("\nMenu :");
         System.out.println("1. Ajouter un livre");
@@ -18,7 +19,8 @@ public class BibliothequeMunicipaleParis {
         
     }
     public static void main(String[] args) {
-        
+        Livre.ajouterLivre("1234567890", "Titre du livre", "Auteur du livre", 5);
+
          String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          

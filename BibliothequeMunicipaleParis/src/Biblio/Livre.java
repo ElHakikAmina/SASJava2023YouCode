@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.sql.Connection;
+
 
 public class Livre {
 	private String ISBN; 
@@ -12,16 +14,18 @@ public class Livre {
 	private String auteur; 
 	private int quantite;
 	//
+	
 	protected static void afficherTousLesLivres() {
         try {
             Connection connexion = ConnexionBDD.seConnecterDB();
             String query = "SELECT * FROM livre"; 
 
             PreparedStatement preparedStatement = connexion.prepareStatement(query);
+            
             ResultSet resultSet = preparedStatement.executeQuery();
+            
 
             while (resultSet.next()) {
-                
                 String isbn = resultSet.getString("ISBN");
                 String titre = resultSet.getString("titre");
                 String auteur = resultSet.getString("auteur");
@@ -36,9 +40,37 @@ public class Livre {
             }
 
             ConnexionBDD.fermerConnexion(connexion);
+        
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+	
 	//
+	
+	public static void ajouterLivre(String ISBN, String titre, String auteur, int quantite) {
+        try {
+            Connection connexion = ConnexionBDD.seConnecterDB();
+            String query = "INSERT INTO livre (ISBN, titre, auteur, quantite) VALUES (?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connexion.prepareStatement(query);
+            preparedStatement.setString(1, ISBN);
+            preparedStatement.setString(2, titre);
+            preparedStatement.setString(3, auteur);
+            preparedStatement.setInt(4, quantite);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Le livre a été ajouté avec succès.");
+            } else {
+                System.out.println("Erreur lors de l'ajout du livre.");
+            }
+
+            ConnexionBDD.fermerConnexion(connexion);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
 }
