@@ -20,9 +20,16 @@ public class Livre {
 	 private static Scanner scanner = new Scanner(System.in);
 	//
 	 
-	 public Livre(){ 
+	 
+ public Livre(){ 
 		 
 	 }
+ 
+ 
+ 
+	 public void miseAJourQuantiteLivre(String isbn, int nvlquantite){}
+	 public void rechercherLivreParISBN(String isbn){}
+	
 	 
 	 //
 	 

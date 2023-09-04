@@ -1,6 +1,7 @@
 package Biblio;
 
 import java.util.Date;
+import java.util.Scanner;
 
 public class EmpruntLivre {
 	 private int id;
@@ -9,15 +10,6 @@ public class EmpruntLivre {
 	 private Date date_emprunt;
 	 private Date date_retour;
 	 
-	 public void emprunterLivre(String isbn)
-	 {
+	 private static Scanner scanner = new Scanner(System.in);
 		 
-	 }
-	 public void afficherListeLivresDisponibles() {}
-	 
-	 public void retourneLivre() {}
-	 
-	 public void afficherLivresEmpruntés() {}
-	 
-	 public void statistique() {}
 }
