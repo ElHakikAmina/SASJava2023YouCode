@@ -15,11 +15,7 @@ public class ConnexionBDD {
         public static Connection seConnecterDB() throws SQLException {
             return DriverManager.getConnection(url, utilisateur, motDePasse);
         }
-       
-       
-        
-        
-        
+           
         public static void fermerConnexion(Connection connexion) throws SQLException {
             if (connexion != null) {
                 connexion.close();

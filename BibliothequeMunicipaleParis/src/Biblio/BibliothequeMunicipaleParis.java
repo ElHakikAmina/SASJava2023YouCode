@@ -20,8 +20,8 @@ public class BibliothequeMunicipaleParis {
     }
     public static void main(String[] args) {
     	Livre livre = new Livre ();
-    	livre.supprimerLivre("1");
-    	System.out.println(livre.rechercherLivreParISBN("1khf"));
+    	
+    	//System.out.println(livre.rechercherLivreParISBN("1khf"));
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
@@ -29,7 +29,7 @@ public class BibliothequeMunicipaleParis {
         // emprunteur.ajoutEmprunteur("z",4,"h");
          
          
-         livre.miseAJourQuantiteLivre("1", 10);
+         //livre.miseAJourQuantiteLivre("1", 10);
          EmpruntLivre empruntLivre = new EmpruntLivre();
          //empruntLivre.emprunterLivre();
          
@@ -56,9 +56,10 @@ public class BibliothequeMunicipaleParis {
         		    String isbnEmprunt = scanner.nextLine();
         		    //empruntLivre.emprunterLivre(isbnEmprunt);
         		 ;break;
+        	 case "7":livre.supprimerLivre("1");;break;
         	 /*case "5":;break;
         	 case "6":;break;
-        	 case "7":;break;
+        	 
         	 case "8":;break;
         	 case "9":;break;
         	 */

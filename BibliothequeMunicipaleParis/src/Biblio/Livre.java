@@ -67,6 +67,7 @@ public class Livre {
  public boolean rechercherLivreParISBN(String isbn) {
 	    try {
 	        Connection connexion = ConnexionBDD.seConnecterDB();
+	
 	        String query = "SELECT * FROM livre WHERE ISBN = ?";
 
 	        PreparedStatement preparedStatement = connexion.prepareStatement(query);
