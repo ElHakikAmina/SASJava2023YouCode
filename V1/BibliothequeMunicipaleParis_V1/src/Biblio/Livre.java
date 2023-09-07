@@ -25,6 +25,37 @@ public class Livre {
 		 
 	 }
  
+ public void modifierInfoLivre (String isbn) {
+	 String s;
+	 System.out.println("Donner le ISBN du livre à modifier");
+	 s= scanner.nextine();
+	 //le ivre existe ou non????
+	 //la cas ou : si livre existe 
+	 System.out.println("1- modifer le titre");
+	 System.out.println("2 - modifier l'auteur");
+	 System.out.println("3 - Quité");
+	 String choix = scanner.nextLine();
+	 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3"))
+	 {
+		 System.out.println("1- modifer le titre");
+		 System.out.println("2 - modifier l'auteur");
+		 System.out.println("3 - Quité");
+		 String choix = scanner.nextLine();
+	 }
+	 
+	 // 
+	 /*try {
+		 Connection connexion = 
+	 }catch(SQLException e)
+	 {
+		 e.printStackTrace();
+	 }*/
+ }
+ 
+ 
+ 
+ 
+ 
  
  public void miseAJourQuantiteLivre(String isbn, int nouvelleQuantite) {
 	    Connection connexion = null;
@@ -244,11 +275,7 @@ public class Livre {
 		  
 	 }
 	 
-	 public void modifierInfoLivre (String isbn) {
-		 
-	
-		
-	 }
+	 
 	 
 	 
 	 
