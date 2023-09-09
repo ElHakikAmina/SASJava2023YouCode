@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import java.sql.Connection;
 
 
@@ -16,6 +16,7 @@ public class Livre {
 	private String titre; 
 	private String auteur; 
 	private String quantite;
+	private int id;
 	
 	 private static Scanner scanner = new Scanner(System.in);
 	//
@@ -308,6 +309,8 @@ public class Livre {
 
         System.out.println("Saisissez l'auteur du livre : ");
         this.auteur = scanner.nextLine();
+        
+         
 
        /* System.out.println("Saisissez la quantité du livre : ");
         this.quantite = scanner.nextInt();
@@ -332,17 +335,19 @@ public class Livre {
                 System.out.println("La quantité doit être un nombre entier. Veuillez réessayer.");
             }
         }
-
+        ajouterLivre(titre,auteur,quantite);
         // Demander l'ISBN quantité fois
         for (int i = 0; i < Integer.parseInt(quantite); i++) {
             System.out.println("Saisissez l'ISBN du livre " + (i + 1) + " : ");
             String isbn = scanner.nextLine();
+            ISBN isbnClasse = new ISBN();
+            isbnClasse.ajouterISBN(isbn,"1",this.id);
             // Faites quelque chose avec l'ISBN (par exemple, ajouter à une liste ou à la base de données)
         }
         
         
         
-       // ajouterLivre(ISBN,titre,auteur,quantite);
+      
 	}
 	
 	//
@@ -381,32 +386,43 @@ public class Livre {
 	
 	//
 	
-	public  void ajouterLivre(String ISBN, String titre, String auteur, int quantite) {
+	public  void ajouterLivre( String titre, String auteur, String quantite) {
         try {
-           
+                       
+            String query = "INSERT INTO livre ( titre, auteur, quantite) VALUES ( ?, ?, ?)";
 
-            //Connection connexion = ConnexionDB.seConnecterDB();
-            
-            String query = "INSERT INTO livre (ISBN, titre, auteur, quantite) VALUES (?, ?, ?, ?)";
-
-            PreparedStatement preparedStatement = connexion.prepareStatement(query);
-            preparedStatement.setString(1, ISBN);
-            preparedStatement.setString(2, titre);
-            preparedStatement.setString(3, auteur);
-            preparedStatement.setInt(4, quantite);
+            PreparedStatement preparedStatement = connexion.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            //preparedStatement.setString(1, ISBN);
+            preparedStatement.setString(1, titre);
+            preparedStatement.setString(2, auteur);
+            preparedStatement.setString(3, quantite);
 
             int rowsInserted = preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            
+            if (resultSet.next()) {
+                int lastInsertedID = resultSet.getInt(1);
+                //System.out.println("Last Inserted ID: " + lastInsertedID);
+                this.id=lastInsertedID;
+            }
+            
             if (rowsInserted > 0) {
                 System.out.println("Le livre a été ajouté avec succès.");
+                
             } else {
                 System.out.println("Erreur lors de l'ajout du livre.");
             }
-
-            //ConnexionDB.fermerConnexion(connexion);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
     }
+
+	
+	
+	
+	
+	
+	
 	
 }
