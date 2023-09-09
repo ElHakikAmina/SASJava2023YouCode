@@ -1,30 +1,35 @@
+  create  database bibliotheque;
 
- CREATE DATABASE Bibliotheque;
+use bibliotheque;
 
-USE Bibliotheque;
-
-CREATE TABLE livre (
-    ISBN VARCHAR(13) PRIMARY KEY,
-    titre VARCHAR(255) NOT NULL,
-    auteur VARCHAR(255),
-   quantite int
+create table  emprunt_livre(
+id int primary key auto_increment,
+livre_ISBN varchar(255),
+id_emprunteur int,
+Date_emprunt date,
+Date_retour date,
+FOREIGN KEY (id_emprunteur) REFERENCES emprunteur(id),
+FOREIGN KEY (livre_ISBN) REFERENCES isbn(ISBN)
 );
 
+-- Création de la table "isbn"
+ create table emprunteur (
+ id int primary key auto_increment,
+ nom_complet varchar (255),
+ numTel varchar (255),
+ adresse varchar (255)
+ );
 
-CREATE TABLE Emprunteur (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom_complet VARCHAR(255) NOT NULL,
-    numTel int,
-    adresse VARCHAR(255)
+create table livre (
+id int primary key auto_increment,
+titre varchar (255),
+auteur varchar (255),
+quantite int 
 );
 
-
-CREATE TABLE emprunt_livre (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    livreISBN VARCHAR(13),
-    emprunteurID INT,
-    dateEmprunt DATE,
-    dateRetour DATE,
-    FOREIGN KEY (LivreISBN) REFERENCES livre(ISBN),
-    FOREIGN KEY (EmprunteurID) REFERENCES emprunteur(ID)
+CREATE TABLE isbn (
+    ISBN VARCHAR(255) PRIMARY KEY,
+    status VARCHAR(255),
+    id_livre INT,
+    FOREIGN KEY (id_livre) REFERENCES livre(id)
 );
