@@ -446,10 +446,10 @@ public class Livre {
 	
 	//
 	
-	public static  void afficherTousLesLivres() {
+	public static  void afficherTousLesLivresDisponible() {
         try {
             //Connection connexion = ConnexionDB.seConnecterDB();
-            String query = "SELECT * FROM livre"; 
+            String query = "SELECT * FROM isbn i INNER JOIN livre l on i.id_livre =l.id where status ='1'"; 
 
             
             PreparedStatement preparedStatement = connexion.prepareStatement(query);

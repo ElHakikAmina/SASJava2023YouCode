@@ -45,7 +45,7 @@ public class Biblio {
         	 {
         	 //case "0":System.out.println("Bye");break;
         	 case "1": livre.saisi();break;
-        	 case "2":Livre.afficherTousLesLivres();break;
+        	 case "2":Livre.afficherTousLesLivresDisponible();break;
         	 case "3":livre.rechercherLivre();break;
         	 case "4":
         		 empruntLivre.empruntterLivre();break;
