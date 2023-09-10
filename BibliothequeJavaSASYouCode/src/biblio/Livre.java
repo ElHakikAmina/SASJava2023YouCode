@@ -432,9 +432,14 @@ public class Livre {
         ajouterLivre(titre,auteur,quantite);
         // Demander l'ISBN quantité fois
         for (int i = 0; i < Integer.parseInt(quantite); i++) {
-            System.out.println("Saisissez l'ISBN du livre " + (i + 1) + " : ");
+        	System.out.println("Saisissez l'ISBN du livre " + (i + 1) + " : ");
             String isbn = scanner.nextLine();
-            //ISBN isbnClasse = new ISBN();
+        	while(isbnClasse.ISBNexiste(isbn))
+        	{
+        		System.out.println(isbn +"existe déjà! Saisissez l'ISBN du livre " + (i + 1) + " : ");
+        		 isbn = scanner.nextLine();
+        	}
+            
             isbnClasse.ajouterISBN(isbn,"1",this.id);
             // Faites quelque chose avec l'ISBN (par exemple, ajouter à une liste ou à la base de données)
         }

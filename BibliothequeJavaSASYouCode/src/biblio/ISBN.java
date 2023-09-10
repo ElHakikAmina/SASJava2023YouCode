@@ -77,7 +77,7 @@ public class ISBN {
 	        return false;
 	    }
 	}
-	public boolean ISBNexiste(String isbn)
+	public  boolean ISBNexiste(String isbn)
 	{
 		try {
 	        //Connection connexion = ConnexionDB.seConnecterDB();
