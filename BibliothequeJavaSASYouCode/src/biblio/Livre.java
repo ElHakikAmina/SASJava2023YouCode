@@ -100,18 +100,22 @@ public class Livre {
  
  public void modifierInfoLivre () {
 	 String ibnsAModifier;
+	 
 	 System.out.println("Donner le ISBN du livre à modifier");
 	 ibnsAModifier= scanner.nextLine();
+	 
+	 //System.out.println(rechercherLivreParISBN(ibnsAModifier));
 	 //le ivre existe ou non????
 	 //la cas ou : si livre existe 
 	 System.out.println("1- modifer le titre");
 	 System.out.println("2 - modifier l'auteur");
-	 System.out.println("3 - Quité");
+	 System.out.println("3 - modifier les deux");
+	 System.out.println("4 - Quité");
 	 String choix = scanner.nextLine();
 	 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4"))
 	 {
 		 System.out.println("1- modifer le titre");
-		 System.out.println("2 - modifier l'auteuttr");
+		 System.out.println("2 - modifier l'auteur");
 		 System.out.println("3 - modifier les deux");
 		 System.out.println("4 - Quité");
 		 choix = scanner.nextLine();
@@ -176,12 +180,13 @@ public class Livre {
 	    }
 	}
 
- public boolean rechercherLivreParISBN(String isbn) {
+ public void rechercherLivreParISBN(String isbn) {
 	    try {
 	        //Connection connexion = ConnexionDB.seConnecterDB();
 	
-	        String query = "SELECT * FROM livre WHERE ISBN = ?";
+	      
 
+	        String query = "SELECT * from isbn i INNER JOIN livre l ON i.id_livre = l.id where i.ISBN = ? ";
 	        PreparedStatement preparedStatement = connexion.prepareStatement(query);
 	        preparedStatement.setString(1, isbn);
 
@@ -200,18 +205,18 @@ public class Livre {
 
 	            
 	            //ConnexionDB.fermerConnexion(connexion);
-	            return true;
+	            //return true;
 	        } else {
 	            System.out.println("Le livre avec l'ISBN " + isbn + " n'existe pas.");
 
 	            
 	            //ConnexionDB.fermerConnexion(connexion);
-	            return false;
+	            //return false;
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        
-	        return false;
+	        //return false;
 	    }
 	}
 

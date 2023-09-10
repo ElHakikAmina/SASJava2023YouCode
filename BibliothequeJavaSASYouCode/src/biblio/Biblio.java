@@ -60,8 +60,6 @@ public class Biblio {
         	 case "8":livre.modifierInfoLivre();break;
         	 /*case "5":;break;
         	 case "6":;break;
-        	 
-        	 
         	 case "9":;break;
         	 */
         	 //default:break;
