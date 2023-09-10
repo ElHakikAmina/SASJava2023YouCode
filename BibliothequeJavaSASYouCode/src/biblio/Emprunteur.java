@@ -2,11 +2,12 @@ package biblio;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
- 
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class Emprunteur {
 	private int id;
@@ -17,6 +18,57 @@ public class Emprunteur {
 	public static Connection connexion = ConnexionDB.getInstance().getConnexion();
 	
 	private static Scanner scanner = new Scanner(System.in);
+	
+	
+	
+
+	
+	public void afficherEmprunteurEnRetard() {
+        try {
+            // Obtenir la date d'aujourd'hui
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateAujourdhui = new Date();
+            String dateAujourdhuiStr = dateFormat.format(dateAujourdhui);
+
+            // Requête SQL pour sélectionner les emprunteurs en retard
+            String requeteSQL = "SELECT e.nom_complet, e.numTel, e.adresse " +
+                                "FROM emprunteur e " +
+                                "JOIN emprunt_livre el ON e.id = el.id_emprunteur " +
+                                "JOIN isbn i ON el.livre_ISBN = i.ISBN " +
+                                "WHERE i.status = '0' AND el.Date_retour < ?";
+
+            PreparedStatement preparedStatement = connexion.prepareStatement(requeteSQL);
+            preparedStatement.setString(1, dateAujourdhuiStr);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                System.out.println("Emprunteurs en retard :");
+                do {
+                    String nomComplet = resultSet.getString("nom_complet");
+                    String numTel = resultSet.getString("numTel");
+                    String adresse = resultSet.getString("adresse");
+                    
+                    System.out.println("Nom complet : " + nomComplet);
+                    System.out.println("Numéro de téléphone : " + numTel);
+                    System.out.println("Adresse : " + adresse);
+                    System.out.println();
+                } while (resultSet.next());
+            } else {
+                System.out.println("Aucun emprunteur en retard trouvé.");
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+	
+	
+	
+	
 	
 	public void afficherTousLesEmprunteurs() 
 	{

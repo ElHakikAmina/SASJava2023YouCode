@@ -113,7 +113,7 @@ public class Biblio {
         	 case "9":empruntLivre.livrePerdus();break;
         	 case "10":empruntLivre.statistiques();break;
         	 case "11":emprunteur.afficherTousLesEmprunteurs();break;
-        	 
+        	 case "12":emprunteur.afficherEmprunteurEnRetard();break;
         	 
         	 /*
         	 
