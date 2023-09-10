@@ -19,6 +19,7 @@ public class Biblio {
         System.out.println("               |       9. Afficher les livre perdus                |");
         System.out.println("               |       10. Statistique                             |");
         System.out.println("               |       11. Afficher tous les emprunteur            |");
+        System.out.println("               |       12. Afficher les emprunteur en retard       |");
         System.out.println("               |       0. Quitter                                  |");
         System.out.println("               |---------------------------------------------------|");
     }

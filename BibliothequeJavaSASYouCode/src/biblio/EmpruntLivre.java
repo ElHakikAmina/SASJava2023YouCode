@@ -38,20 +38,27 @@ public class EmpruntLivre {
 
 	            // Nombre d'emprunteurs qui n'ont pas encore retourné le livre
 	            String requeteEmprunteursNonRetournes = "SELECT COUNT(*) AS emprunteursNonRetournes "
-	                    + "FROM emprunteur "
-	                    + "WHERE id IN (SELECT DISTINCT id_emprunteur FROM emprunt_livre WHERE Date_retour < ?)";
+                        + "FROM emprunteur "
+                        + "WHERE id IN (SELECT DISTINCT id_emprunteur "
+                        + "FROM emprunt_livre el "
+                        + "JOIN isbn i ON el.livre_ISBN = i.ISBN "
+                        + "WHERE el.Date_retour < ? AND i.status = '0')";
 	            PreparedStatement preparedStatementEmprunteursNonRetournes = connexion.prepareStatement(requeteEmprunteursNonRetournes);
 	            preparedStatementEmprunteursNonRetournes.setDate(1, java.sql.Date.valueOf(aujourdhui));
 	            ResultSet resultSetEmprunteursNonRetournes = preparedStatementEmprunteursNonRetournes.executeQuery();
 	            resultSetEmprunteursNonRetournes.next();
 	            int emprunteursNonRetournes = resultSetEmprunteursNonRetournes.getInt("emprunteursNonRetournes");
 
-	            // Nombre de livres disponibles
-	            String requeteLivresDisponibles = "SELECT COUNT(*) AS livresDisponibles FROM livre WHERE id NOT IN (SELECT id_livre FROM isbn WHERE status = 0)";
+	         // Nombre de livres disponibles
+	            String requeteLivresDisponibles = "SELECT COUNT(*) AS livresDisponibles FROM isbn WHERE status = '1'";
 	            PreparedStatement preparedStatementLivresDisponibles = connexion.prepareStatement(requeteLivresDisponibles);
 	            ResultSet resultSetLivresDisponibles = preparedStatementLivresDisponibles.executeQuery();
-	            resultSetLivresDisponibles.next();
-	            int livresDisponibles = resultSetLivresDisponibles.getInt("livresDisponibles");
+
+	            int livresDisponibles = 0; // Initialisation à zéro
+
+	            if (resultSetLivresDisponibles.next()) {
+	                livresDisponibles = resultSetLivresDisponibles.getInt("livresDisponibles");
+	            }
 
 	            // Nombre de livres en attente de retour
 	            String requeteLivresEnAttente = "SELECT COUNT(*) AS livresEnAttente "
@@ -78,7 +85,7 @@ public class EmpruntLivre {
 	            // Affichage des statistiques
 	            System.out.println("Statistiques de la bibliothèque :");
 	            System.out.println("Nombre total d'emprunteurs : " + totalEmprunteurs);
-	            System.out.println("Nombre d'emprunteurs qui n'ont pas encore retourné le livre : " + emprunteursNonRetournes);
+	            System.out.println("Nombre d'emprunteurs qui ont dépasser la date de retour : " + emprunteursNonRetournes);
 	            System.out.println("Nombre de livres disponibles : " + livresDisponibles);
 	            System.out.println("Nombre de livres en attente de retour : " + livresEnAttente);
 	            System.out.println("Nombre de livres qui ont dépassé la date de retour : " + livresDepasses);
