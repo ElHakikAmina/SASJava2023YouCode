@@ -22,18 +22,22 @@ public class Biblio {
     }
     public static void main(String[] args) throws InterruptedException  {
     	
-         
-         System.out.println("-------------------------------------------------");
-    	 String texte = "Bibliotheque Minicipale de Paris ";
-
-         for (int i = 0; i < texte.length(); i++) {
-             System.out.print(texte.charAt(i));
-             Thread.sleep(100); // Pause de 100 millisecondes entre chaque caractère
-         }
-         System.out.println("\n Un Projet de SAS YouCode Java");
-         System.out.println("\nRéalisé par : EL HAKIK Amina");
-         System.out.println("\n-------------------------------------------------");
-         System.out.println(); // Aller à la ligne après l'affichage complet
+    	System.out.print("\n"); 
+    	System.out.println("               /*------------------------------------------------------------------------*/");
+        String texte = "BIBLIOTHEQUE MUNICIPALE DE PARIS ";
+        System.out.print("\n");
+        System.out.print("                                     ");
+        for (int i = 0; i < texte.length(); i++) {
+            System.out.print(texte.charAt(i));
+            Thread.sleep(100); // Pause de 100 millisecondes entre chaque caractère
+        }
+        System.out.print("\n");
+        System.out.print("\n");
+        System.out.println("               /*-------------------- Un Projet de SAS YouCode Java ---------------------*/");
+        System.out.println("               /*-------------------- Réalisé par : EL HAKIK Amina ----------------------*/");
+        System.out.println("               /*------------------------------------------------------------------------*/");
+        System.out.println(); // Aller à la ligne après l'affichage complet
+    
      
     	 
     	 
