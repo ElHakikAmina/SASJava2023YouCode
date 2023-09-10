@@ -3,28 +3,39 @@ package biblio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Emprunteur {
-	private int id;
+	//private int id;
 	private String nom_complet; 
 	private int numTel;  
 	private String adresse;
 	
-	public void ajoutEmprunteur(String nomComplet, int numTel, String adresse) {
-	    Connection connexion = null;
+	public static Connection connexion = ConnexionDB.getInstance().getConnexion();
+	
+	private static Scanner scanner = new Scanner(System.in);
+	
+	public void ajoutEmprunteur() {
+	    System.out.println("Donner le nom complet : ");
+	    this.nom_complet=scanner.nextLine();
+	    System.out.println("Donner le numero de tel : ");
+	    this.numTel=scanner.nextInt();
+	    scanner.nextLine();
+	    System.out.println("Donner l'adresse : ");
+	    this.adresse=scanner.nextLine();
 	    PreparedStatement preparedStatement = null;
 
 	    try {
-	        connexion = ConnexionBDD.seConnecterDB();
+	        
 
 	        
 	        String query = "INSERT INTO emprunteur (nom_complet, numTel, adresse) VALUES (?, ?, ?)";
 
 	        
 	        preparedStatement = connexion.prepareStatement(query);
-	        preparedStatement.setString(1, nomComplet);
-	        preparedStatement.setInt(2, numTel);
-	        preparedStatement.setString(3, adresse);
+	        preparedStatement.setString(1, this.nom_complet);
+	        preparedStatement.setInt(2, this.numTel);
+	        preparedStatement.setString(3, this.adresse);
 
 	        
 	        int rowsInserted = preparedStatement.executeUpdate();

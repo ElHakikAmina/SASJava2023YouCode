@@ -12,7 +12,30 @@ public class ISBN {
 	
 	public static Connection connexion = ConnexionDB.getInstance().getConnexion();
 	
-	
+	public boolean ISBNDispo(String isbn)
+	{
+		try {
+	       
+	        String query = "SELECT * from isbn where ISBN = ? and status='1' ";
+	        PreparedStatement preparedStatement = connexion.prepareStatement(query);
+	        preparedStatement.setString(1, isbn);
+
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	          
+	            return true;
+	        } else {
+	        	
+
+	            return false;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        
+	        return false;
+	    }
+	}
 	public boolean ISBNexiste(String isbn)
 	{
 		try {

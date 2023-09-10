@@ -20,18 +20,14 @@ public class Biblio {
     }
     public static void main(String[] args) {
     	Livre livre = new Livre ();
+    	EmpruntLivre empruntLivre = new EmpruntLivre();
     	
     	//System.out.println(livre.rechercherLivreParISBN("1khf"));
     	 String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
          Emprunteur emprunteur = new Emprunteur();
-        // emprunteur.ajoutEmprunteur("z",4,"h");
-         
-         
-         //livre.miseAJourQuantiteLivre("1", 10);
-         EmpruntLivre empruntLivre = new EmpruntLivre();
-         //empruntLivre.emprunterLivre();
+     
          
          System.out.println("Mot e passe: ");
     	 String pwsSaisi = scanner.nextLine();
@@ -52,10 +48,7 @@ public class Biblio {
         	 case "2":Livre.afficherTousLesLivres();break;
         	 case "3":livre.rechercherLivre();break;
         	 case "4":
-        		 System.out.println("Saisissez l'ISBN du livre que vous souhaitez emprunter : ");
-        		    String isbnEmprunt = scanner.nextLine();
-        		    //empruntLivre.emprunterLivre(isbnEmprunt);
-        		 ;break;
+        		 empruntLivre.empruntterLivre();break;
         	 case "7":livre.supprimerLivre("1");break;
         	 case "8":livre.modifierInfoLivre();break;
         	 /*case "5":;break;
