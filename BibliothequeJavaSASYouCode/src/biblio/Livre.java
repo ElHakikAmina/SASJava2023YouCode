@@ -108,12 +108,13 @@ public class Livre {
 	//le ivre existe ou non????
 	 while(!isbnClasse.ISBNexiste(ibnsAModifier))
 	 {
+		 System.out.println("ATENTION! "+ibnsAModifier+" n'existe pas! ");
 		 System.out.println("Donner le ISBN du livre à modifier tapper Q pour quitter : ");
 		 ibnsAModifier= scanner.nextLine();
 		
 		 if (ibnsAModifier.equals("Q")) break;
 	 }
-	 
+	 if(ibnsAModifier.equals("Q")) System.out.println("Modification quittée");
 	 
 	 //la cas ou : si livre existe 
 	 if(isbnClasse.ISBNexiste(ibnsAModifier))

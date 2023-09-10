@@ -91,8 +91,8 @@ public class ISBN {
 	          
 	            return true;
 	        } else {
-	        	if(isbn.equals("Q")) System.out.println("Modification quittée");
-	        	else System.out.println("Le livre avec l'ISBN " + isbn + " n'existe pas.");
+	        	//if(isbn.equals("Q")) System.out.println("Modification quittée");
+	        	//else System.out.println("Le livre avec l'ISBN " + isbn + " n'existe pas.");
 
 	            
 	            //ConnexionDB.fermerConnexion(connexion);
