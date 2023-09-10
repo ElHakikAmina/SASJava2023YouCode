@@ -60,17 +60,16 @@ public class EmpruntLivre {
 	                livresDisponibles = resultSetLivresDisponibles.getInt("livresDisponibles");
 	            }
 
-	            // Nombre de livres en attente de retour
-	            String requeteLivresEnAttente = "SELECT COUNT(*) AS livresEnAttente "
-	                    + "FROM emprunt_livre "
-	                    + "WHERE Date_retour >= ? AND Date_retour < ?";
-	            LocalDate dateRetourLimite = aujourdhui.minusDays(1); // Limite d'un jour avant aujourd'hui
+	         // Nombre de livres en attente de retour
+	            String requeteLivresEnAttente = "SELECT COUNT(*) AS livresEnAttente FROM isbn WHERE status = '0'";
 	            PreparedStatement preparedStatementLivresEnAttente = connexion.prepareStatement(requeteLivresEnAttente);
-	            preparedStatementLivresEnAttente.setDate(1, java.sql.Date.valueOf(aujourdhui));
-	            preparedStatementLivresEnAttente.setDate(2, java.sql.Date.valueOf(dateRetourLimite));
 	            ResultSet resultSetLivresEnAttente = preparedStatementLivresEnAttente.executeQuery();
-	            resultSetLivresEnAttente.next();
-	            int livresEnAttente = resultSetLivresEnAttente.getInt("livresEnAttente");
+
+	            int livresEnAttente = 0; // Initialisation à zéro
+
+	            if (resultSetLivresEnAttente.next()) {
+	                livresEnAttente = resultSetLivresEnAttente.getInt("livresEnAttente");
+	            }
 
 	            // Nombre de livres qui ont dépassé la date de retour
 	            String requeteLivresDepasses = "SELECT COUNT(*) AS livresDepasses "
@@ -83,12 +82,18 @@ public class EmpruntLivre {
 	            int livresDepasses = resultSetLivresDepasses.getInt("livresDepasses");
 
 	            // Affichage des statistiques
-	            System.out.println("Statistiques de la bibliothèque :");
-	            System.out.println("Nombre total d'emprunteurs : " + totalEmprunteurs);
-	            System.out.println("Nombre d'emprunteurs qui ont dépasser la date de retour : " + emprunteursNonRetournes);
-	            System.out.println("Nombre de livres disponibles : " + livresDisponibles);
-	            System.out.println("Nombre de livres en attente de retour : " + livresEnAttente);
-	            System.out.println("Nombre de livres qui ont dépassé la date de retour : " + livresDepasses);
+	            System.out.println("                                     Statistiques de la bibliothèque :");
+	            System.out.println("+----------------------------------------------------------+-----------------------+");
+	            System.out.println("| Nombre total d'emprunteurs                                     " + totalEmprunteurs);
+	            System.out.println("+----------------------------------------------------------+-----------------------+");
+	            System.out.println("| Nombre d'emprunteurs qui ont dépasser la date de retour        " + emprunteursNonRetournes);
+	            System.out.println("+----------------------------------------------------------+-----------------------+");
+	            System.out.println("| Nombre de livres disponibles                                   " + livresDisponibles);
+	            System.out.println("+----------------------------------------------------------+-----------------------+");
+	            System.out.println("| Nombre de livres en attente de retour                          " + livresEnAttente);
+	            System.out.println("+----------------------------------------------------------+-----------------------+");
+	            System.out.println("| Nombre de livres qui ont dépassé la date de retour             " + livresDepasses);
+	            System.out.println("+----------------------------------------------------------+-----------------------+");
 
 	            resultSetEmprunteurs.close();
 	            preparedStatementEmprunteurs.close();
@@ -131,10 +136,10 @@ public class EmpruntLivre {
 	                String auteur = resultSet.getString("auteur");
 	                Date dateRetour = resultSet.getDate("Date_retour");
 
-	                System.out.println("Titre : " + titre);
-	                System.out.println("Auteur : " + auteur);
+	                System.out.println("Titre                   : " + titre);
+	                System.out.println("Auteur                  : " + auteur);
 	                System.out.println("Date de retour dépassée : " + dateRetour);
-
+	                System.out.println();
 	                nombreTotalLivresPerdus++;
 	            }
 

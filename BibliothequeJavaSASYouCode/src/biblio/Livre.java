@@ -286,7 +286,7 @@ public class Livre {
 	{
 		 try {
 	            //Connection connexion = ConnexionDB.seConnecterDB();
-	            String query = "SELECT * FROM livre WHERE titre = ?";
+	            String query = "SELECT * FROM livre  WHERE titre = ?";
 
 	            PreparedStatement preparedStatement = connexion.prepareStatement(query);
 	            preparedStatement.setString(1, titreChercher);
@@ -294,15 +294,15 @@ public class Livre {
 	            ResultSet resultSet = preparedStatement.executeQuery();
 
 	            while (resultSet.next()) {
-	                String isbn = resultSet.getString("ISBN");
+	                //String isbn = resultSet.getString("ISBN");
 	                String titre = resultSet.getString("titre");
 	                String auteur = resultSet.getString("auteur");
 	                int quantite = resultSet.getInt("quantite");
 
-	                System.out.println("ISBN: " + isbn);
-	                System.out.println("Titre: " + titre);
-	                System.out.println("Auteur: " + auteur);
-	                System.out.println("Quantité: " + quantite);
+	                //System.out.println(" ISBN     : " + isbn);
+	                System.out.println(" Titre    : " + titre);
+	                System.out.println(" Auteur   : " + auteur);
+	                System.out.println(" Quantité : " + quantite);
 	                System.out.println();
 	            }
 
@@ -326,15 +326,15 @@ public class Livre {
         ResultSet resultSet =  preparedStatement.executeQuery();
         
         while (resultSet.next()) {
-            String isbn = resultSet.getString("ISBN");
+            //String isbn = resultSet.getString("ISBN");
             String titre = resultSet.getString("titre");
             String auteur = resultSet.getString("auteur");
             int quantite = resultSet.getInt("quantite");
 
-            System.out.println("ISBN: " + isbn);
-            System.out.println("Titre: " + titre);
-            System.out.println("Auteur: " + auteur);
-            System.out.println("Quantité: " + quantite);
+            //System.out.println(" ISBN     : " + isbn);
+            System.out.println(" Titre    : " + titre);
+            System.out.println(" Auteur   : " + auteur);
+            System.out.println(" Quantité : " + quantite);
             System.out.println();
         }
 
@@ -470,10 +470,10 @@ public class Livre {
                 int quantite = resultSet.getInt("quantite");
 
                 
-                System.out.println("ISBN: " + isbn);
-                System.out.println("Titre: " + titre);
-                System.out.println("Auteur: " + auteur);
-                System.out.println("Quantite: " + quantite);
+                System.out.println("ISBN     : " + isbn);
+                System.out.println("Titre    : " + titre);
+                System.out.println("Auteur   : " + auteur);
+                System.out.println("Quantite : " + quantite);
                 System.out.println();
             }
 
@@ -504,10 +504,10 @@ public class Livre {
                 int quantite = resultSet.getInt("quantite");
 
                 
-                System.out.println("ISBN: " + isbn);
-                System.out.println("Titre: " + titre);
-                System.out.println("Auteur: " + auteur);
-                System.out.println("Quantite: " + quantite);
+                System.out.println("ISBN     : " + isbn);
+                System.out.println("Titre    : " + titre);
+                System.out.println("Auteur   : " + auteur);
+                System.out.println("Quantite : " + quantite);
                 System.out.println();
             }
 
