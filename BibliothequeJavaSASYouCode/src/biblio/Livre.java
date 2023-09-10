@@ -27,10 +27,31 @@ public class Livre {
 		 
 	 }
  
- public void modifierInfoLivre (String isbn) {
-	 String s;
+ public void modifierAuteur(String isbn) {
+     try {
+    	 System.out.println("Donner le nouveau auteur : ");
+    	 String newAuteur = scanner.nextLine();
+         String query = "UPDATE livre JOIN isbn ON livre.id = isbn.id_livre SET livre.auteur = ? WHERE isbn.ISBN = ? ";
+         PreparedStatement preparedStatement = connexion.prepareStatement(query);
+         preparedStatement.setString(1, newAuteur);
+         preparedStatement.setString(2, isbn);
+         int rowsUpdated = preparedStatement.executeUpdate();
+         if (rowsUpdated > 0) {
+             System.out.println("Auteur modifié avec succès.");
+         } else {
+             System.out.println("Erreur lors de la modification de l'auteur.");
+         }
+         
+     } catch (SQLException e) {
+         e.printStackTrace();
+     }
+ }
+ 
+ 
+ public void modifierInfoLivre () {
+	 String ibnsAModifier;
 	 System.out.println("Donner le ISBN du livre à modifier");
-	 s= scanner.nextine();
+	 ibnsAModifier= scanner.nextLine();
 	 //le ivre existe ou non????
 	 //la cas ou : si livre existe 
 	 System.out.println("1- modifer le titre");
@@ -41,10 +62,18 @@ public class Livre {
 	 {
 		 System.out.println("1- modifer le titre");
 		 System.out.println("2 - modifier l'auteur");
-		 System.out.println("3 - Quité");
-		 String choix = scanner.nextLine();
+		 System.out.println("3 - modifier les deux");
+		 System.out.println("4 - Quité");
+		 choix = scanner.nextLine();
 	 }
 	 
+	 switch (choix)
+	 {
+	 //case "1":;break;
+	 case "2":System.out.println("hhh");this.modifierAuteur(ibnsAModifier);break;
+	 //case "3":;break;
+	 //case "4":;break;
+	 }
 	 // 
 	 /*try {
 		 Connection connexion = 
@@ -64,7 +93,7 @@ public class Livre {
 	    PreparedStatement preparedStatement = null;
 
 	    try {
-	        connexion = ConnexionDB.seConnecterDB();
+	        //connexion = ConnexionDB.seConnecterDB();
 
 	        
 	        String query = "UPDATE livre SET quantite = ? WHERE ISBN = ?";
@@ -99,7 +128,7 @@ public class Livre {
 
  public boolean rechercherLivreParISBN(String isbn) {
 	    try {
-	        Connection connexion = ConnexionDB.seConnecterDB();
+	        //Connection connexion = ConnexionDB.seConnecterDB();
 	
 	        String query = "SELECT * FROM livre WHERE ISBN = ?";
 
@@ -120,13 +149,13 @@ public class Livre {
 	            System.out.println("Quantité: " + quantite);
 
 	            
-	            ConnexionDB.fermerConnexion(connexion);
+	            //ConnexionDB.fermerConnexion(connexion);
 	            return true;
 	        } else {
 	            System.out.println("Le livre avec l'ISBN " + isbn + " n'existe pas.");
 
 	            
-	            ConnexionDB.fermerConnexion(connexion);
+	            //ConnexionDB.fermerConnexion(connexion);
 	            return false;
 	        }
 	    } catch (SQLException e) {
@@ -190,7 +219,7 @@ public class Livre {
 	public void rechercheParTitre(String titreChercher)
 	{
 		 try {
-	            Connection connexion = ConnexionDB.seConnecterDB();
+	            //Connection connexion = ConnexionDB.seConnecterDB();
 	            String query = "SELECT * FROM livre WHERE titre = ?";
 
 	            PreparedStatement preparedStatement = connexion.prepareStatement(query);
@@ -211,7 +240,7 @@ public class Livre {
 	                System.out.println();
 	            }
 
-	            ConnexionDB.fermerConnexion(connexion);
+	            //ConnexionDB.fermerConnexion(connexion);
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -221,7 +250,7 @@ public class Livre {
 	public void rechercheParAuteur(String auteurChercher)
 	{
 		try {
-		Connection connexion = ConnexionDB.seConnecterDB();
+		//Connection connexion = ConnexionDB.seConnecterDB();
 		String query = "SELECT * FROM livre where auteur = ? ";
         PreparedStatement preparedStatement = connexion.prepareStatement(query);
 
@@ -243,7 +272,7 @@ public class Livre {
             System.out.println();
         }
 
-        ConnexionDB.fermerConnexion(connexion);
+        //ConnexionDB.fermerConnexion(connexion);
 
     } catch (SQLException e) {
         e.printStackTrace();
@@ -262,7 +291,7 @@ public class Livre {
 		 if (!confirmation.equals("yes")) System.out.println("supprission annulé");
 		 else if(confirmation.equals("yes"))
 		 try {
-			 Connection connection = ConnexionDB.seConnecterDB();
+			 //Connection connection = ConnexionDB.seConnecterDB();
 			 String query = "DELETE FROM livre WHERE ISBN= ? ";
 			 PreparedStatement preparedStatement= connection.prepareStatement(query);
 			  preparedStatement.setString(1,isbn);
