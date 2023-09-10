@@ -65,6 +65,7 @@ public class EmpruntLivre {
 	                    int lignesAffectees = preparedStatement.executeUpdate();
 
 	                    if (lignesAffectees > 0) {
+	                    	isbnClasse.rendreStatusNonDispo(livre_ISBN);
 	                        System.out.println("L'emprunt a été enregistré avec succès.");
 	                    } else {
 	                        System.out.println("L'enregistrement de l'emprunt a échoué.");

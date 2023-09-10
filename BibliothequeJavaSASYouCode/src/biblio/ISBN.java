@@ -12,6 +12,47 @@ public class ISBN {
 	
 	public static Connection connexion = ConnexionDB.getInstance().getConnexion();
 	
+	
+	 public boolean rendreStatusDispo(String ISBN) {
+	        PreparedStatement preparedStatement = null;
+
+	        try {
+	            String query = "UPDATE isbn SET status = 1 WHERE ISBN = ?";
+	            preparedStatement = connexion.prepareStatement(query);
+	            preparedStatement.setString(1, ISBN);
+
+	            int rowsUpdated = preparedStatement.executeUpdate();
+
+	            return rowsUpdated > 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        } finally {
+	            // Fermez les ressources (PreparedStatement, etc.) et gérez les exceptions appropriées ici
+	        }
+	    }
+
+	    // Fonction pour rendre le statut de l'ISBN non disponible (status != 1)
+	    public boolean rendreStatusNonDispo(String ISBN) {
+	        PreparedStatement preparedStatement = null;
+
+	        try {
+	            String query = "UPDATE isbn SET status = 0 WHERE ISBN = ?";
+	            preparedStatement = connexion.prepareStatement(query);
+	            preparedStatement.setString(1, ISBN);
+
+	            int rowsUpdated = preparedStatement.executeUpdate();
+
+	            return rowsUpdated > 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        } finally {
+	            // Fermez les ressources (PreparedStatement, etc.) et gérez les exceptions appropriées ici
+	        }
+	    }
+	
+	
 	public boolean ISBNDispo(String isbn)
 	{
 		try {
