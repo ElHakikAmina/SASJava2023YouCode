@@ -13,7 +13,7 @@ public class ISBN {
 	public static Connection connexion = ConnexionDB.getInstance().getConnexion();
 	
 	
-	 public boolean rendreStatusDispo(String ISBN) {
+	 public boolean rendreStatusDispo(String ISBN) throws SQLException {
 	        PreparedStatement preparedStatement = null;
 
 	        try {

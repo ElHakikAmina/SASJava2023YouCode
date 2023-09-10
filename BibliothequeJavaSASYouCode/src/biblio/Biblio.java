@@ -51,7 +51,8 @@ public class Biblio {
         		 empruntLivre.empruntterLivre();break;
         	 case "7":livre.supprimerLivre("1");break;
         	 case "8":livre.modifierInfoLivre();break;
-        	 /*case "5":;break;
+        	 case "5":empruntLivre.retournerLivre();break;
+        	 /*
         	 case "6":;break;
         	 case "9":;break;
         	 */

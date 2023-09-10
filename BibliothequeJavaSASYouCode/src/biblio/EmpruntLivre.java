@@ -21,7 +21,54 @@ public class EmpruntLivre {
 	 private Emprunteur emprunteur = new Emprunteur();
 	 
 	 private static Scanner scanner = new Scanner(System.in);
+	///////////////////////////	 
+	 
+	 public void retournerLivre()
+	 {
+		 // demander le 	isbn à empruntééé
+		 System.out.println("donner le ISBN du livre à retourner");
+		 this.livre_ISBN = scanner.nextLine();
 		 
+		 //System.out.println(this.livre_ISBN);
+		 
+		 //Isbn existe?????
+		 if(isbnClasse.ISBNexiste(this.livre_ISBN))
+		 {
+			 //status est 1????
+			 if(!isbnClasse.ISBNDispo(this.livre_ISBN))
+			 {
+				 
+				 
+				 
+				 
+	                
+	                
+	                
+	             // Insérer les informations dans la table emprunt_livre
+	                try {
+	                    
+	                    	isbnClasse.rendreStatusDispo(livre_ISBN);
+	                        System.out.println("L'emprunt a été enregistré avec succès.");
+	                   
+
+	                   
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	                /////////////////////////
+				 
+			 }else {
+				 System.out.println("ISBN est déjà retourné");
+			 }
+			 
+		 }else
+		 {
+			 System.out.println("ISBN n'existe pas");
+		 }
+	 }
+
+	 
+	 ////////////////////////
 	 public void empruntterLivre()
 	 {
 		 // demander le 	isbn à empruntééé
