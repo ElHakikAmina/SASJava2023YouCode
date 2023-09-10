@@ -17,7 +17,8 @@ public class Biblio {
         System.out.println("               |       7. Supprimer un livre                       |");
         System.out.println("               |       8. Modifier les informations d'un livre     |");
         System.out.println("               |       9. Afficher les livre perdus                |");
-        System.out.println("               |       9. Statistique                              |");
+        System.out.println("               |       10. Statistique                             |");
+        System.out.println("               |       11. Afficher tous les emprunteur            |");
         System.out.println("               |       0. Quitter                                  |");
         System.out.println("               |---------------------------------------------------|");
     }
@@ -110,6 +111,8 @@ public class Biblio {
         	 case "7":livre.supprimerLivre("1");break;
         	 case "8":livre.modifierInfoLivre();break;
         	 case "9":empruntLivre.livrePerdus();break;
+        	 case "10":empruntLivre.statistiques();break;
+        	 case "11":emprunteur.afficherTousLesEmprunteurs();break;
         	 
         	 
         	 /*

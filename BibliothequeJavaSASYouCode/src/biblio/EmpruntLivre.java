@@ -24,6 +24,80 @@ public class EmpruntLivre {
 	 private static Scanner scanner = new Scanner(System.in);
 	///////////////////////////	 
 	
+	 public void statistiques() {
+	        Connection connexion = ConnexionDB.getInstance().getConnexion();
+	        LocalDate aujourdhui = LocalDate.now();
+
+	        try {
+	            // Nombre total d'emprunteurs
+	            String requeteEmprunteurs = "SELECT COUNT(*) AS totalEmprunteurs FROM emprunteur";
+	            PreparedStatement preparedStatementEmprunteurs = connexion.prepareStatement(requeteEmprunteurs);
+	            ResultSet resultSetEmprunteurs = preparedStatementEmprunteurs.executeQuery();
+	            resultSetEmprunteurs.next();
+	            int totalEmprunteurs = resultSetEmprunteurs.getInt("totalEmprunteurs");
+
+	            // Nombre d'emprunteurs qui n'ont pas encore retourné le livre
+	            String requeteEmprunteursNonRetournes = "SELECT COUNT(*) AS emprunteursNonRetournes "
+	                    + "FROM emprunteur "
+	                    + "WHERE id IN (SELECT DISTINCT id_emprunteur FROM emprunt_livre WHERE Date_retour < ?)";
+	            PreparedStatement preparedStatementEmprunteursNonRetournes = connexion.prepareStatement(requeteEmprunteursNonRetournes);
+	            preparedStatementEmprunteursNonRetournes.setDate(1, java.sql.Date.valueOf(aujourdhui));
+	            ResultSet resultSetEmprunteursNonRetournes = preparedStatementEmprunteursNonRetournes.executeQuery();
+	            resultSetEmprunteursNonRetournes.next();
+	            int emprunteursNonRetournes = resultSetEmprunteursNonRetournes.getInt("emprunteursNonRetournes");
+
+	            // Nombre de livres disponibles
+	            String requeteLivresDisponibles = "SELECT COUNT(*) AS livresDisponibles FROM livre WHERE id NOT IN (SELECT id_livre FROM isbn WHERE status = 0)";
+	            PreparedStatement preparedStatementLivresDisponibles = connexion.prepareStatement(requeteLivresDisponibles);
+	            ResultSet resultSetLivresDisponibles = preparedStatementLivresDisponibles.executeQuery();
+	            resultSetLivresDisponibles.next();
+	            int livresDisponibles = resultSetLivresDisponibles.getInt("livresDisponibles");
+
+	            // Nombre de livres en attente de retour
+	            String requeteLivresEnAttente = "SELECT COUNT(*) AS livresEnAttente "
+	                    + "FROM emprunt_livre "
+	                    + "WHERE Date_retour >= ? AND Date_retour < ?";
+	            LocalDate dateRetourLimite = aujourdhui.minusDays(1); // Limite d'un jour avant aujourd'hui
+	            PreparedStatement preparedStatementLivresEnAttente = connexion.prepareStatement(requeteLivresEnAttente);
+	            preparedStatementLivresEnAttente.setDate(1, java.sql.Date.valueOf(aujourdhui));
+	            preparedStatementLivresEnAttente.setDate(2, java.sql.Date.valueOf(dateRetourLimite));
+	            ResultSet resultSetLivresEnAttente = preparedStatementLivresEnAttente.executeQuery();
+	            resultSetLivresEnAttente.next();
+	            int livresEnAttente = resultSetLivresEnAttente.getInt("livresEnAttente");
+
+	            // Nombre de livres qui ont dépassé la date de retour
+	            String requeteLivresDepasses = "SELECT COUNT(*) AS livresDepasses "
+	                    + "FROM emprunt_livre "
+	                    + "WHERE Date_retour < ?";
+	            PreparedStatement preparedStatementLivresDepasses = connexion.prepareStatement(requeteLivresDepasses);
+	            preparedStatementLivresDepasses.setDate(1, java.sql.Date.valueOf(aujourdhui));
+	            ResultSet resultSetLivresDepasses = preparedStatementLivresDepasses.executeQuery();
+	            resultSetLivresDepasses.next();
+	            int livresDepasses = resultSetLivresDepasses.getInt("livresDepasses");
+
+	            // Affichage des statistiques
+	            System.out.println("Statistiques de la bibliothèque :");
+	            System.out.println("Nombre total d'emprunteurs : " + totalEmprunteurs);
+	            System.out.println("Nombre d'emprunteurs qui n'ont pas encore retourné le livre : " + emprunteursNonRetournes);
+	            System.out.println("Nombre de livres disponibles : " + livresDisponibles);
+	            System.out.println("Nombre de livres en attente de retour : " + livresEnAttente);
+	            System.out.println("Nombre de livres qui ont dépassé la date de retour : " + livresDepasses);
+
+	            resultSetEmprunteurs.close();
+	            preparedStatementEmprunteurs.close();
+	            resultSetEmprunteursNonRetournes.close();
+	            preparedStatementEmprunteursNonRetournes.close();
+	            resultSetLivresDisponibles.close();
+	            preparedStatementLivresDisponibles.close();
+	            resultSetLivresEnAttente.close();
+	            preparedStatementLivresEnAttente.close();
+	            resultSetLivresDepasses.close();
+	            preparedStatementLivresDepasses.close();
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	 
 	 //////
 	 

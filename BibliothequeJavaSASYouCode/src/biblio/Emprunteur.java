@@ -18,6 +18,39 @@ public class Emprunteur {
 	
 	private static Scanner scanner = new Scanner(System.in);
 	
+	public void afficherTousLesEmprunteurs() 
+	{
+		 try {
+	            Statement statement = connexion.createStatement();
+	            String query = "SELECT * FROM emprunteur";
+
+	            ResultSet resultSet = statement.executeQuery(query);
+	            System.out.println("        -----------------------------------------------------------------------");
+	            System.out.println("       | Voilà les informations de tous les emprunteurs dans la base de donnée |");
+	            System.out.println("        -----------------------------------------------------------------------");
+
+	            while (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String nomComplet = resultSet.getString("nom_complet");
+	                String numTel = resultSet.getString("numTel");
+	                String adresse = resultSet.getString("adresse");
+
+	                System.out.println("ID : " + id);
+	                System.out.println("Nom complet : " + nomComplet);
+	                System.out.println("Numéro de téléphone : " + numTel);
+	                System.out.println("Adresse : " + adresse);
+	                System.out.println("+-------------------------------------+");
+	                System.out.println();
+	            }
+
+	            resultSet.close();
+	            statement.close();
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	}
+	
 	public int getId()
 	{
 		return this.id;
