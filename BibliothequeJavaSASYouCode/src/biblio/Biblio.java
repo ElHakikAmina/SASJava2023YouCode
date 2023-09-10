@@ -5,20 +5,72 @@ import java.util.Scanner;
 public class Biblio {
 
 	public static void afficherMenu() {
-        System.out.println("\nMenu :");
-        System.out.println("1. Ajouter un livre");
-        System.out.println("2. Afficher la liste des livres disponibles");
-        System.out.println("3. Rechercher un livre");
-        System.out.println("4. Emprunter un livre");
-        System.out.println("5. Retourner un livre");
-        System.out.println("6. Afficher la liste des livres empruntés");
-        System.out.println("7. Supprimer un livre");
-        System.out.println("8. Modifier les informations d'un livre");
-        System.out.println("9. Statistique");
-        System.out.println("0. Quitter");
-        
+		System.out.println("\n ---------------------------------------------------");
+		System.out.println("|                        MENU                        |");
+		System.out.println(" ---------------------------------------------------");
+        System.out.println("| 1. Ajouter un livre                                |");
+        System.out.println("| 2. Afficher la liste des livres disponibles        |");
+        System.out.println("| 3. Rechercher un livre                             |");
+        System.out.println("| 4. Emprunter un livre                              |");
+        System.out.println("| 5. Retourner un livre                              |");
+        System.out.println("| 6. Afficher la liste des livres empruntés          |");
+        System.out.println("| 7. Supprimer un livre                              |");
+        System.out.println("| 8. Modifier les informations d'un livre            |");
+        System.out.println("| 9. Statistique                                     |");
+        System.out.println("| 0. Quitter                                         |");
+        System.out.println("|----------------------------------------------------|");
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException  {
+    	
+         
+         System.out.println("-------------------------------------------------");
+    	 String texte = "Bibliotheque Minicipale de Paris ";
+
+         for (int i = 0; i < texte.length(); i++) {
+             System.out.print(texte.charAt(i));
+             Thread.sleep(100); // Pause de 100 millisecondes entre chaque caractère
+         }
+         System.out.println("\n Un Projet de SAS YouCode Java");
+         System.out.println("\nRéalisé par : EL HAKIK Amina");
+         System.out.println("\n-------------------------------------------------");
+         System.out.println(); // Aller à la ligne après l'affichage complet
+     
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+         
+         
+         
+     
+
+
+
+
+
+
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	Livre livre = new Livre ();
     	EmpruntLivre empruntLivre = new EmpruntLivre();
     	
@@ -47,12 +99,13 @@ public class Biblio {
         	 case "1": livre.saisi();break;
         	 case "2":Livre.afficherTousLesLivresDisponible();break;
         	 case "3":livre.rechercherLivre();break;
-        	 case "4":
-        		 empruntLivre.empruntterLivre();break;
-        	 case "7":livre.supprimerLivre("1");break;
-        	 case "8":livre.modifierInfoLivre();break;
+        	 case "4":empruntLivre.empruntterLivre();break;
         	 case "5":empruntLivre.retournerLivre();break;
         	 case "6":Livre.afficherTousLesLivresEmprunte();break;
+        	 case "7":livre.supprimerLivre("1");break;
+        	 case "8":livre.modifierInfoLivre();break;
+        	 
+        	 
         	 /*
         	 
         	 case "9":;break;
