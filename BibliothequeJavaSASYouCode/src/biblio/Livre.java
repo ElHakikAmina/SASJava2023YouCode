@@ -480,6 +480,40 @@ public class Livre {
 	
 	//
 	
+	public static  void afficherTousLesLivresEmprunte() {
+        try {
+            //Connection connexion = ConnexionDB.seConnecterDB();
+            String query = "SELECT * FROM isbn i INNER JOIN livre l on i.id_livre =l.id where status ='0'"; 
+
+            
+            PreparedStatement preparedStatement = connexion.prepareStatement(query);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+
+            while (resultSet.next()) {
+                String isbn = resultSet.getString("ISBN");
+                String titre = resultSet.getString("titre");
+                String auteur = resultSet.getString("auteur");
+                int quantite = resultSet.getInt("quantite");
+
+                
+                System.out.println("ISBN: " + isbn);
+                System.out.println("Titre: " + titre);
+                System.out.println("Auteur: " + auteur);
+                System.out.println("Quantite: " + quantite);
+                System.out.println();
+            }
+
+           // ConnexionDB.fermerConnexion(connexion);
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	
+	//
 	public  void ajouterLivre( String titre, String auteur, String quantite) {
         try {
                        
