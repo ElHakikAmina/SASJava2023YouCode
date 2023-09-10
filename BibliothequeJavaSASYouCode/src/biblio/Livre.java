@@ -18,6 +18,7 @@ public class Livre {
 	private String quantite;
 	private int id;
 	
+	private ISBN isbnClasse= new ISBN();
 	 private static Scanner scanner = new Scanner(System.in);
 	//
 	 public static Connection connexion = ConnexionDB.getInstance().getConnexion();
@@ -104,30 +105,42 @@ public class Livre {
 	 System.out.println("Donner le ISBN du livre à modifier");
 	 ibnsAModifier= scanner.nextLine();
 	 
-	 //System.out.println(rechercherLivreParISBN(ibnsAModifier));
-	 //le ivre existe ou non????
+	//le ivre existe ou non????
+	 while(!isbnClasse.ISBNexiste(ibnsAModifier))
+	 {
+		 System.out.println("Donner le ISBN du livre à modifier tapper Q pour quitter : ");
+		 ibnsAModifier= scanner.nextLine();
+		
+		 if (ibnsAModifier.equals("Q")) break;
+	 }
+	 
+	 
 	 //la cas ou : si livre existe 
-	 System.out.println("1- modifer le titre");
-	 System.out.println("2 - modifier l'auteur");
-	 System.out.println("3 - modifier les deux");
-	 System.out.println("4 - Quité");
-	 String choix = scanner.nextLine();
-	 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4"))
+	 if(isbnClasse.ISBNexiste(ibnsAModifier))
 	 {
 		 System.out.println("1- modifer le titre");
 		 System.out.println("2 - modifier l'auteur");
 		 System.out.println("3 - modifier les deux");
 		 System.out.println("4 - Quité");
-		 choix = scanner.nextLine();
+		 String choix = scanner.nextLine();
+		 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4"))
+		 {
+			 System.out.println("1- modifer le titre");
+			 System.out.println("2 - modifier l'auteur");
+			 System.out.println("3 - modifier les deux");
+			 System.out.println("4 - Quité");
+			 choix = scanner.nextLine();
+		 }
+		 
+		 switch (choix)
+		 {
+		 case "1":this.modifierTitre(ibnsAModifier);;break;
+		 case "2":this.modifierAuteur(ibnsAModifier);break;
+		 case "3":this.modifierTitreAuteur(ibnsAModifier);break;
+		 case "4":break;
+		 }
 	 }
-	 
-	 switch (choix)
-	 {
-	 case "1":this.modifierTitre(ibnsAModifier);;break;
-	 case "2":this.modifierAuteur(ibnsAModifier);break;
-	 case "3":this.modifierTitreAuteur(ibnsAModifier);break;
-	 case "4":break;
-	 }
+	
 	 // 
 	 /*try {
 		 Connection connexion = 
@@ -183,9 +196,6 @@ public class Livre {
  public void rechercherLivreParISBN(String isbn) {
 	    try {
 	        //Connection connexion = ConnexionDB.seConnecterDB();
-	
-	      
-
 	        String query = "SELECT * from isbn i INNER JOIN livre l ON i.id_livre = l.id where i.ISBN = ? ";
 	        PreparedStatement preparedStatement = connexion.prepareStatement(query);
 	        preparedStatement.setString(1, isbn);
@@ -424,7 +434,7 @@ public class Livre {
         for (int i = 0; i < Integer.parseInt(quantite); i++) {
             System.out.println("Saisissez l'ISBN du livre " + (i + 1) + " : ");
             String isbn = scanner.nextLine();
-            ISBN isbnClasse = new ISBN();
+            //ISBN isbnClasse = new ISBN();
             isbnClasse.ajouterISBN(isbn,"1",this.id);
             // Faites quelque chose avec l'ISBN (par exemple, ajouter à une liste ou à la base de données)
         }
