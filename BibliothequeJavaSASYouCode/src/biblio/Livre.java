@@ -47,6 +47,56 @@ public class Livre {
      }
  }
  
+ //
+ 
+ public void modifierTitre(String isbn) {
+     try {
+    	 System.out.println("Donner le nouveau titre : ");
+    	 String newTitre = scanner.nextLine();
+         String query = "UPDATE livre JOIN isbn ON livre.id = isbn.id_livre SET livre.titre = ? WHERE isbn.ISBN = ? ";
+         PreparedStatement preparedStatement = connexion.prepareStatement(query);
+         preparedStatement.setString(1, newTitre);
+         preparedStatement.setString(2, isbn);
+         int rowsUpdated = preparedStatement.executeUpdate();
+         if (rowsUpdated > 0) {
+             System.out.println("Auteur modifié avec succès.");
+         } else {
+             System.out.println("Erreur lors de la modification de l'auteur.");
+         }
+         
+     } catch (SQLException e) {
+         e.printStackTrace();
+     }
+ }
+ 
+ //
+ 
+ public void modifierTitreAuteur(String isbn) {
+     try {
+    	 System.out.println("Donner le nouveau titre : ");
+    	 String newTitre = scanner.nextLine();
+         
+    	 System.out.println("Donner le nouveau auteur : ");
+    	 String newAuteur = scanner.nextLine();
+    	 
+    	 String query = "UPDATE livre JOIN isbn ON livre.id = isbn.id_livre SET livre.auteur= ? , livre.titre = ? WHERE isbn.ISBN = ? ";
+         PreparedStatement preparedStatement = connexion.prepareStatement(query);
+         preparedStatement.setString(1, newAuteur);
+         preparedStatement.setString(2, newTitre);
+         preparedStatement.setString(3, isbn);
+         int rowsUpdated = preparedStatement.executeUpdate();
+         if (rowsUpdated > 0) {
+             System.out.println("Auteur modifié avec succès.");
+         } else {
+             System.out.println("Erreur lors de la modification de l'auteur.");
+         }
+         
+     } catch (SQLException e) {
+         e.printStackTrace();
+     }
+ }
+ 
+ 
  
  public void modifierInfoLivre () {
 	 String ibnsAModifier;
@@ -58,10 +108,10 @@ public class Livre {
 	 System.out.println("2 - modifier l'auteur");
 	 System.out.println("3 - Quité");
 	 String choix = scanner.nextLine();
-	 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3"))
+	 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4"))
 	 {
 		 System.out.println("1- modifer le titre");
-		 System.out.println("2 - modifier l'auteur");
+		 System.out.println("2 - modifier l'auteuttr");
 		 System.out.println("3 - modifier les deux");
 		 System.out.println("4 - Quité");
 		 choix = scanner.nextLine();
@@ -69,10 +119,10 @@ public class Livre {
 	 
 	 switch (choix)
 	 {
-	 //case "1":;break;
-	 case "2":System.out.println("hhh");this.modifierAuteur(ibnsAModifier);break;
-	 //case "3":;break;
-	 //case "4":;break;
+	 case "1":this.modifierTitre(ibnsAModifier);;break;
+	 case "2":this.modifierAuteur(ibnsAModifier);break;
+	 case "3":this.modifierTitreAuteur(ibnsAModifier);break;
+	 case "4":break;
 	 }
 	 // 
 	 /*try {
