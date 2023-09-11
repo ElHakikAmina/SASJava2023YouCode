@@ -1,6 +1,7 @@
 package biblio;
 
 import java.util.Scanner;
+import java.io.IOException;
 import java.sql.Connection;
 
 public class Biblio {
@@ -25,9 +26,6 @@ public class Biblio {
         System.out.println("               |---------------------------------------------------|");
     }
     public static void main(String[] args) throws InterruptedException  {
-    	
-    	
-   
     	
     	System.out.print("\n"); 
     	System.out.println("               /*------------------------------------------------------------------------*/");
@@ -80,24 +78,50 @@ public class Biblio {
     	
     	
     	
-    	
-    	
+    	//DataFile dataFile = new DataFile();
+    	//dataFile.generateStatisticsToFile();
     	Livre livre = new Livre ();
     	EmpruntLivre empruntLivre = new EmpruntLivre();
-    	
+    	System.out.println(empruntLivre.totalNombreEmprunteur());
     	//System.out.println(livre.rechercherLivreParISBN("1khf"));
-    	 String pwd="1234";
+    	// String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
          
          Emprunteur emprunteur = new Emprunteur();
      
          
-         System.out.println("Mot e passe: ");
+         
+         
+         while (true) {
+             // Demandez à l'utilisateur de saisir le mot de passe
+             System.out.print("Entrez le mot de passe : ");
+             String inputPassword = scanner.nextLine();
+
+             try {
+                 if (Login.verifyPassword(inputPassword)) {
+                     System.out.println("Mot de passe correct. Accès autorisé.");
+                     break; // Sortez de la boucle si le mot de passe est correct.
+                 } else {
+                     System.out.println("Mot de passe incorrect. Veuillez réessayer.");
+                 }
+             } catch (IOException e) {
+                 System.err.println("Une erreur s'est produite lors de la vérification du mot de passe.");
+                 break; // Sortez de la boucle en cas d'erreur.
+             }
+         }
+         
+         
+         
+         
+         
+         
+         
+         /*System.out.println("Mot e passe: ");
     	 String pwsSaisi = scanner.nextLine();
          while(!pwd.equals(pwsSaisi)) {
         	 System.out.println("Mot e passe: ");
         	 pwsSaisi = scanner.nextLine();
-         }
+         }*/
          String choix;
          afficherMenu(); 
          System.out.println("\n   donner votre choix: ");

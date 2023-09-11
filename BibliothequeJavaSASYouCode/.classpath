@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/user/Documents/JDBCPilote/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/sha512/commons-codec-1.16.0-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
