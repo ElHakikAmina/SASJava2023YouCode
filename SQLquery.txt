@@ -1,4 +1,20 @@
 DELIMITER //
+CREATE TRIGGER after_insert_emprunt_livre
+AFTER INSERT ON emprunt_livre
+FOR EACH ROW
+BEGIN
+  -- Mettre à jour la quantité disponible du livre dans la table "livre"
+  UPDATE livre
+  SET quantite = quantite - 1
+  WHERE id = (SELECT id_livre FROM isbn WHERE ISBN = NEW.livre_ISBN);
+END;
+//
+DELIMITER ;
+
+
+
+
+DELIMITER //
 CREATE TRIGGER decrement_quantity_after_delete
 AFTER DELETE ON isbn
 FOR EACH ROW
