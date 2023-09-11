@@ -1,3 +1,17 @@
+DELIMITER //
+CREATE TRIGGER decrement_quantity_after_delete
+AFTER DELETE ON isbn
+FOR EACH ROW
+BEGIN
+    UPDATE livre
+    SET quantite = quantite - 1
+    WHERE id IN (SELECT id_livre FROM isbn WHERE ISBN = OLD.ISBN);
+END;
+//
+DELIMITER ;
+
+
+
   create  database bibliotheque;
 
 use bibliotheque;
