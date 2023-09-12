@@ -38,9 +38,9 @@ public class Livre {
          preparedStatement.setString(2, isbn);
          int rowsUpdated = preparedStatement.executeUpdate();
          if (rowsUpdated > 0) {
-             System.out.println("Auteur modifié avec succès.");
+             System.out.println(ConsoleColors.GREEN+"Auteur modifié avec succès."+ ConsoleColors.RESET);
          } else {
-             System.out.println("Erreur lors de la modification de l'auteur.");
+             System.out.println(ConsoleColors.RED+"Erreur lors de la modification de l'auteur."+ ConsoleColors.RESET);
          }
          
      } catch (SQLException e) {
@@ -60,9 +60,9 @@ public class Livre {
          preparedStatement.setString(2, isbn);
          int rowsUpdated = preparedStatement.executeUpdate();
          if (rowsUpdated > 0) {
-             System.out.println("Auteur modifié avec succès.");
+             System.out.println(ConsoleColors.GREEN+"Titre modifié avec succès."+ ConsoleColors.RESET);
          } else {
-             System.out.println("Erreur lors de la modification de l'auteur.");
+             System.out.println(ConsoleColors.RED+"Erreur lors de la modification de l'auteur."+ ConsoleColors.RESET);
          }
          
      } catch (SQLException e) {
@@ -87,9 +87,9 @@ public class Livre {
          preparedStatement.setString(3, isbn);
          int rowsUpdated = preparedStatement.executeUpdate();
          if (rowsUpdated > 0) {
-             System.out.println("Auteur modifié avec succès.");
+             System.out.println(ConsoleColors.GREEN+"Auteur modifié avec succès."+ ConsoleColors.RESET);
          } else {
-             System.out.println("Erreur lors de la modification de l'auteur.");
+             System.out.println(ConsoleColors.RED+"Erreur lors de la modification de l'auteur."+ ConsoleColors.RESET);
          }
          
      } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class Livre {
 	//le ivre existe ou non????
 	 while(!isbnClasse.ISBNexiste(ibnsAModifier))
 	 {
-		 System.out.println("ATENTION! "+ibnsAModifier+" n'existe pas! ");
+		 System.out.println(ConsoleColors.RED+"ATENTION! "+ibnsAModifier+" n'existe pas! "+ ConsoleColors.RESET);
 		 System.out.println("Donner le ISBN du livre à modifier tapper Q pour quitter : ");
 		 ibnsAModifier= scanner.nextLine();
 		
@@ -197,38 +197,19 @@ public class Livre {
 	            System.out.println("Auteur: " + auteur);
 	            System.out.println("Quantité: " + quantite);
 
-	            
-	            //ConnexionDB.fermerConnexion(connexion);
-	            //return true;
 	        } else {
-	            System.out.println("Le livre avec l'ISBN " + isbn + " n'existe pas.");
+	            System.out.println(ConsoleColors.RED+"Le livre avec l'ISBN " + isbn + " n'existe pas."+ ConsoleColors.RESET);
 
-	            
-	            //ConnexionDB.fermerConnexion(connexion);
-	            //return false;
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        
-	        //return false;
+	       
 	    }
 	}
-
-
-	
- 
- 
- 
- 
- 
- 
 	 
 	 //
 	 
-	
-
-	 
-	
 	 public void rechercherLivre() {
 		 String choix,titre,auteur,isbn;
 		 System.out.println("chooisiser comment chercher");
@@ -268,7 +249,6 @@ public class Livre {
 	public void rechercheParTitre(String titreChercher)
 	{
 		 try {
-	            //Connection connexion = ConnexionDB.seConnecterDB();
 	            String query = "SELECT * FROM livre  WHERE titre = ?";
 
 	            PreparedStatement preparedStatement = connexion.prepareStatement(query);
@@ -277,19 +257,18 @@ public class Livre {
 	            ResultSet resultSet = preparedStatement.executeQuery();
 
 	            while (resultSet.next()) {
-	                //String isbn = resultSet.getString("ISBN");
 	                String titre = resultSet.getString("titre");
 	                String auteur = resultSet.getString("auteur");
 	                int quantite = resultSet.getInt("quantite");
 
-	                //System.out.println(" ISBN     : " + isbn);
+	               
 	                System.out.println(" Titre    : " + titre);
 	                System.out.println(" Auteur   : " + auteur);
 	                System.out.println(" Quantité : " + quantite);
 	                System.out.println();
 	            }
 
-	            //ConnexionDB.fermerConnexion(connexion);
+	           
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -299,7 +278,7 @@ public class Livre {
 	public void rechercheParAuteur(String auteurChercher)
 	{
 		try {
-		//Connection connexion = ConnexionDB.seConnecterDB();
+		
 		String query = "SELECT * FROM livre where auteur = ? ";
         PreparedStatement preparedStatement = connexion.prepareStatement(query);
 
@@ -309,19 +288,18 @@ public class Livre {
         ResultSet resultSet =  preparedStatement.executeQuery();
         
         while (resultSet.next()) {
-            //String isbn = resultSet.getString("ISBN");
+            
             String titre = resultSet.getString("titre");
             String auteur = resultSet.getString("auteur");
             int quantite = resultSet.getInt("quantite");
 
-            //System.out.println(" ISBN     : " + isbn);
+            
             System.out.println(" Titre    : " + titre);
             System.out.println(" Auteur   : " + auteur);
             System.out.println(" Quantité : " + quantite);
             System.out.println();
         }
 
-        //ConnexionDB.fermerConnexion(connexion);
 
     } catch (SQLException e) {
         e.printStackTrace();
@@ -357,9 +335,9 @@ public class Livre {
 		 {
 			 String confirmation;
 			 System.out.println("Etes vous sur de vouloir supprimer le livre ISBN = "+isbn);
-			 System.out.println("yes/non ** [ ATTENTION CETTE ETAPE EST IRREVERSIBLE] **");
+			 System.out.println(ConsoleColors.RED+"yes/non ** [ ATTENTION CETTE ETAPE EST IRREVERSIBLE] **"+ ConsoleColors.RESET);
 			 confirmation = scanner.nextLine();
-			 if (!confirmation.equals("yes")) System.out.println("supprission annulé");
+			 if (!confirmation.equals("yes")) System.out.println(ConsoleColors.RESET+"supprission annulé"+ ConsoleColors.RESET);
 			 else if(confirmation.equals("yes"))
 			 try {
 				 
@@ -374,7 +352,7 @@ public class Livre {
 				 e.printStackTrace();
 			 }	  
 		 }else {
-			 System.out.println("le livre est deja emprunté");
+			 System.out.println(ConsoleColors.RED+"Vous ne pouvez pas supprimer ce livre, le livre est deja emprunté"+ ConsoleColors.RESET);
 		 }
 		 
 	 }
@@ -412,15 +390,7 @@ public class Livre {
         System.out.println("Saisissez l'auteur du livre : ");
         this.auteur = scanner.nextLine();
         
-         
-
-       /* System.out.println("Saisissez la quantité du livre : ");
-        this.quantite = scanner.nextInt();
         
-        System.out.println("Saisissez l'ISBN du livre : ");
-        this.ISBN = scanner.nextLine();
-        */
-        // Demander la quantité jusqu'à ce qu'elle soit un entier valide
         while (true) {
             System.out.println("Saisissez la quantité du livre : ");
             String quantiteStr = scanner.nextLine();
@@ -431,10 +401,10 @@ public class Livre {
                 break;
             } else if (estFloat(quantiteStr)) {
                 // Vérifier si la quantité est un float (nombre à virgule flottante)
-                System.out.println("La quantité ne peut pas être un nombre à virgule flottante. Veuillez réessayer.");
+                System.out.println(ConsoleColors.RED+"La quantité ne peut pas être un nombre à virgule flottante. Veuillez réessayer."+ ConsoleColors.RESET);
             } else {
                 // La quantité n'est ni un entier ni un float
-                System.out.println("La quantité doit être un nombre entier. Veuillez réessayer.");
+                System.out.println(ConsoleColors.RED+"La quantité doit être un nombre entier. Veuillez réessayer."+ ConsoleColors.RESET);
             }
         }
         ajouterLivre(titre,auteur,quantite);
@@ -444,7 +414,7 @@ public class Livre {
             String isbn = scanner.nextLine();
         	while(isbnClasse.ISBNexiste(isbn))
         	{
-        		System.out.println(isbn +"existe déjà! Saisissez l'ISBN du livre " + (i + 1) + " : ");
+        		System.out.println(ConsoleColors.RED+isbn +"existe déjà!"+ConsoleColors.RESET+" Saisissez l'ISBN du livre " + (i + 1) + " : ");
         		 isbn = scanner.nextLine();
         	}
             

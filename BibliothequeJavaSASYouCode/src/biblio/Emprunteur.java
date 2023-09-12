@@ -116,7 +116,7 @@ public class Emprunteur {
 	    this.numTel = scanner.nextLine();
 
 	    if (numeroDeTelephoneExisteDeja(this.numTel)) {
-	        System.out.println("Ce numéro de téléphone existe déjà. L'emprunteur n'a pas été ajouté.");
+	        System.out.println(ConsoleColors.RED+"Ce numéro de téléphone existe déjà. L'emprunteur n'a pas été ajouté."+ ConsoleColors.RESET);
 	    } else {
 	        System.out.println("Donner l'adresse : ");
 	        this.adresse = scanner.nextLine();
@@ -133,9 +133,9 @@ public class Emprunteur {
 	            int rowsInserted = preparedStatement.executeUpdate();
 
 	            if (rowsInserted > 0) {
-	                System.out.println("Emprunteur ajouté avec succès.");
+	                System.out.println(ConsoleColors.GREEN+"Emprunteur ajouté avec succès."+ ConsoleColors.RESET);
 	            } else {
-	                System.out.println("L'ajout de l'emprunteur a échoué.");
+	                System.out.println(ConsoleColors.RED+"L'ajout de l'emprunteur a échoué."+ ConsoleColors.RESET);
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
