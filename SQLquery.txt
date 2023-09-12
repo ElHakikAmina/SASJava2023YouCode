@@ -1,4 +1,26 @@
 DELIMITER //
+
+CREATE TRIGGER after_update_isbn_status
+AFTER UPDATE ON isbn
+FOR EACH ROW
+BEGIN
+    IF NEW.status = '1' AND OLD.status = '0' THEN
+        -- Incrémente la quantité du livre lorsque le statut passe de 0 à 1
+        UPDATE livre
+        SET quantite = quantite + 1
+        WHERE id = NEW.id_livre;
+    END IF;
+END;
+//
+DELIMITER ;
+
+
+
+
+
+
+
+DELIMITER //
 CREATE TRIGGER after_insert_emprunt_livre
 AFTER INSERT ON emprunt_livre
 FOR EACH ROW
