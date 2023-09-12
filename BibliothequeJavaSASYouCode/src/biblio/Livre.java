@@ -119,17 +119,19 @@ public class Livre {
 	 //la cas ou : si livre existe 
 	 if(isbnClasse.ISBNexiste(ibnsAModifier))
 	 {
-		 System.out.println("1- modifer le titre");
-		 System.out.println("2 - modifier l'auteur");
-		 System.out.println("3 - modifier les deux");
-		 System.out.println("4 - Quité");
+		 System.out.println("       1 - Modifer le titre");
+		 System.out.println("       2 - Modifier l'auteur");
+		 System.out.println("       3 - Modifier les deux");
+		 System.out.println("       4 - Quité");
+		 System.out.println("                      Votre choix:");
 		 String choix = scanner.nextLine();
 		 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4"))
 		 {
-			 System.out.println("1- modifer le titre");
-			 System.out.println("2 - modifier l'auteur");
-			 System.out.println("3 - modifier les deux");
-			 System.out.println("4 - Quité");
+			 System.out.println("       1 - Modifer le titre");
+			 System.out.println("       2 - Modifier l'auteur");
+			 System.out.println("       3 - Modifier les deux");
+			 System.out.println("       4 - Quité");
+			 System.out.println("                      Votre choix:");
 			 choix = scanner.nextLine();
 		 }
 		 
@@ -472,10 +474,10 @@ public class Livre {
                 int quantite = resultSet.getInt("quantite");
 
                 
-                System.out.println("ISBN     : " + isbn);
-                System.out.println("Titre    : " + titre);
-                System.out.println("Auteur   : " + auteur);
-                System.out.println("Quantite : " + quantite);
+                System.out.println("  ISBN     : " + isbn);
+                System.out.println("  Titre    : " + titre);
+                System.out.println("  Auteur   : " + auteur);
+                System.out.println("  Quantite : " + quantite);
                 System.out.println();
             }
 

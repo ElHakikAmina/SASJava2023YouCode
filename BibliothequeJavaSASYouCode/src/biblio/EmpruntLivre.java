@@ -93,7 +93,7 @@ public class EmpruntLivre {
 	            System.out.println("+----------------------------------------------------------+-----------------------+");
 	            System.out.println("| Nombre de livres en attente de retour                          " + livresEnAttente);
 	            System.out.println("+----------------------------------------------------------+-----------------------+");
-	            System.out.println("| Nombre de livres qui ont dépassé la date de retour             " + livresDepasses);
+	            System.out.println("| Nombre de livres qui ont dépassé la date de retour             " + ConsoleColors.BACKGROUND_RED+livresDepasses+ConsoleColors.RESET);
 	            System.out.println("+----------------------------------------------------------+-----------------------+");
 
 	            resultSetEmprunteurs.close();
@@ -137,9 +137,9 @@ public class EmpruntLivre {
 	                String auteur = resultSet.getString("auteur");
 	                Date dateRetour = resultSet.getDate("Date_retour");
 
-	                System.out.println("Titre                   : " + titre);
-	                System.out.println("Auteur                  : " + auteur);
-	                System.out.println("Date de retour dépassée : " + dateRetour);
+	                System.out.println("  Titre                   : " + titre);
+	                System.out.println("  Auteur                  : " + auteur);
+	                System.out.println("  Date de retour dépassée : " + dateRetour);
 	                System.out.println();
 	                nombreTotalLivresPerdus++;
 	            }
