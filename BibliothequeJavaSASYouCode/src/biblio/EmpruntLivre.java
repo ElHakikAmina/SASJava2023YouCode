@@ -202,44 +202,57 @@ public class EmpruntLivre {
 			 //status est 1????
 			 if(isbnClasse.ISBNDispo(this.livre_ISBN))
 			 {
-				 emprunteur.ajoutEmprunteur();
+				 //emprunteur.ajoutEmprunteur();
+				 String numTel;
+				 System.out.println("donner le numero de telephone du emprunter:");
+				 numTel=scanner.nextLine();
 				 
-				 // Générer automatiquement la date d'emprunt (date actuelle)
-	                LocalDate dateEmprunt = LocalDate.now();
-	                System.out.println("Date d'emprunt : " + dateEmprunt);
-	                
-	                
-	             // Demander la date de retour à l'utilisateur
-	                System.out.println("Entrez la date de retour (AAAA-MM-JJ) :");
-	                String dateRetourStr = scanner.nextLine();
-	                LocalDate dateRetour = LocalDate.parse(dateRetourStr);
-	                
-	                
-	                
-	             // Insérer les informations dans la table emprunt_livre
-	                try {
-	                    String requeteInsertion = "INSERT INTO emprunt_livre (livre_ISBN, id_emprunteur, Date_emprunt, Date_retour) VALUES (?, ?, ?, ?)";
-	                    PreparedStatement preparedStatement = connexion.prepareStatement(requeteInsertion);
-	                    preparedStatement.setString(1, livre_ISBN);
-	                    preparedStatement.setInt(2, emprunteur.getId()); // Supposons que vous avez un getter pour l'ID de l'emprunteur
-	                    preparedStatement.setDate(3, java.sql.Date.valueOf(dateEmprunt)); // Convertir LocalDate en java.sql.Date
-	                    preparedStatement.setDate(4, java.sql.Date.valueOf(dateRetour)); // Convertir LocalDate en java.sql.Date
-
-	                    int lignesAffectees = preparedStatement.executeUpdate();
-
-	                    if (lignesAffectees > 0) {
-	                    	isbnClasse.rendreStatusNonDispo(livre_ISBN);
-	                        System.out.println("L'emprunt a été enregistré avec succès.");
-	                    } else {
-	                        System.out.println("L'enregistrement de l'emprunt a échoué.");
-	                    }
-
-	                    preparedStatement.close();
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-	                /////////////////////////
+				 int idEmprunteur = getIdEmprunteurParNumTel(numTel);
 				 
+				 if(idEmprunteur==-1)
+				 {
+				        System.out.println("Aucun emprunteur avec ce numéro de téléphone n'a été trouvé.");
+
+				 }else
+				 {
+					 // Générer automatiquement la date d'emprunt (date actuelle)
+		                LocalDate dateEmprunt = LocalDate.now();
+		                System.out.println("Date d'emprunt : " + dateEmprunt);
+		                
+		                
+		             // Demander la date de retour à l'utilisateur
+		                System.out.println("Entrez la date de retour (AAAA-MM-JJ) :");
+		                String dateRetourStr = scanner.nextLine();
+		                LocalDate dateRetour = LocalDate.parse(dateRetourStr);
+		                
+		                
+		                
+		             // Insérer les informations dans la table emprunt_livre
+		                try {
+		                    String requeteInsertion = "INSERT INTO emprunt_livre (livre_ISBN, id_emprunteur, Date_emprunt, Date_retour) VALUES (?, ?, ?, ?)";
+		                    PreparedStatement preparedStatement = connexion.prepareStatement(requeteInsertion);
+		                    preparedStatement.setString(1, livre_ISBN);
+		                    preparedStatement.setInt(2, idEmprunteur); // Supposons que vous avez un getter pour l'ID de l'emprunteur
+		                    preparedStatement.setDate(3, java.sql.Date.valueOf(dateEmprunt)); // Convertir LocalDate en java.sql.Date
+		                    preparedStatement.setDate(4, java.sql.Date.valueOf(dateRetour)); // Convertir LocalDate en java.sql.Date
+
+		                    int lignesAffectees = preparedStatement.executeUpdate();
+
+		                    if (lignesAffectees > 0) {
+		                    	isbnClasse.rendreStatusNonDispo(livre_ISBN);
+		                        System.out.println("L'emprunt a été enregistré avec succès.");
+		                    } else {
+		                        System.out.println("L'enregistrement de l'emprunt a échoué.");
+		                    }
+
+		                    preparedStatement.close();
+		                } catch (SQLException e) {
+		                    e.printStackTrace();
+		                }
+		                //
+					 
+				 
+				 }
 			 }else {
 				 System.out.println("ISBN n'est pas disponible");
 			 }
@@ -249,4 +262,41 @@ public class EmpruntLivre {
 			 System.out.println("ISBN n'existe pas");
 		 }
 	 }
+	 
+	 //
+	 
+	 public int getIdEmprunteurParNumTel(String numTel) {
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        String query = "SELECT id FROM emprunteur WHERE numTel = ?";
+		        preparedStatement = connexion.prepareStatement(query);
+		        preparedStatement.setString(1, numTel);
+		        resultSet = preparedStatement.executeQuery();
+
+		        if (resultSet.next()) {
+		            return resultSet.getInt("id");
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        if (resultSet != null) {
+		            try {
+		                resultSet.close();
+		            } catch (SQLException e) {
+		                e.printStackTrace();
+		            }
+		        }
+		        if (preparedStatement != null) {
+		            try {
+		                preparedStatement.close();
+		            } catch (SQLException e) {
+		                e.printStackTrace();
+		            }
+		        }
+		    }
+
+		    return -1; // Retourne -1 si le numéro de téléphone n'a pas été trouvé
+		}
 }
