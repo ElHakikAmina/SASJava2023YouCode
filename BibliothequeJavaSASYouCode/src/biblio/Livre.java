@@ -201,35 +201,35 @@ public class Livre {
 	 
 	 public void rechercherLivre() {
 		 String choix,titre,auteur,isbn;
-		 System.out.println("chooisiser comment chercher");
-		 System.out.println("1- par titre");
-		 System.out.println("2 - par auteur");
-		 System.out.println("3 - par ISBN");
-		 System.out.println("Donner votre choix: ");
+		 System.out.println(" Choisissez comment chercher\n");
+		 System.out.println("     1 - Par titre");
+		 System.out.println("     2 - Par auteur");
+		 System.out.println("     3 - Par ISBN");
+		 System.out.println("\n                Donner votre choix: ");
 		 choix = scanner.nextLine();
 		 while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") )
 		 {
-			 System.out.println("chooisiser comment chercher");
-			 System.out.println("1- par titre");
-			 System.out.println("2 - par auteur");
-			 System.out.println("3 - par ISBN");
-			 System.out.println("Donner votre choix: ");
+			 System.out.println(" Choisissez comment chercher\n");
+			 System.out.println("     1 - Par titre");
+			 System.out.println("     2 - Par auteur");
+			 System.out.println("     3 - Par ISBN");
+			 System.out.println("\n                Donner votre choix: ");
 			 choix = scanner.nextLine();
 		 }
 		 
 		 if(choix.equals("1"))
 		 {
-			 System.out.println("donner le titre à chercher: ");
+			 System.out.println(" Donner le titre à chercher: ");
 			 titre = scanner.nextLine();
 			 rechercheParTitre( titre);
 		 }else if(choix.equals("2"))
 		 {
-			 System.out.println("donner l'auteur à chercher: ");
+			 System.out.println(" Donner l'auteur à chercher: ");
 			 auteur = scanner.nextLine();
 			 rechercheParAuteur( auteur);
 		 }else if(choix.equals("3"))
 		 {
-			 System.out.println("donner ISBN à chercher: ");
+			 System.out.println(" Donner ISBN à chercher: ");
 			 isbn = scanner.nextLine();
 			 rechercherLivreParISBN( isbn);
 		 }
@@ -244,8 +244,13 @@ public class Livre {
 	            preparedStatement.setString(1, titreChercher);
 
 	            ResultSet resultSet = preparedStatement.executeQuery();
-
+	            
+	            boolean existe=false;
+	            
 	            while (resultSet.next()) {
+	            	
+	            	existe = true;
+	            	
 	                String titre = resultSet.getString("titre");
 	                String auteur = resultSet.getString("auteur");
 	                int quantite = resultSet.getInt("quantite");
@@ -257,7 +262,7 @@ public class Livre {
 	                System.out.println();
 	            }
 
-	           
+	           if(!existe) System.out.println(ConsoleColors.RED +" Le livre avec titre "+titreChercher+" n'existe pas"+ ConsoleColors.RESET);
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -273,10 +278,11 @@ public class Livre {
 
 		preparedStatement.setString(1, auteurChercher);
 		
-        
         ResultSet resultSet =  preparedStatement.executeQuery();
         
+        boolean existe = false;
         while (resultSet.next()) {
+        	existe=true;
             
             String titre = resultSet.getString("titre");
             String auteur = resultSet.getString("auteur");
@@ -289,6 +295,7 @@ public class Livre {
             System.out.println();
         }
 
+        if(!existe) System.out.println(ConsoleColors.RED +" Le livre avec auteur "+auteurChercher+" n'existe pas"+ ConsoleColors.RESET);
 
     } catch (SQLException e) {
         e.printStackTrace();
@@ -433,10 +440,10 @@ public class Livre {
                 int quantite = resultSet.getInt("quantite");
 
                 
-                System.out.println("ISBN     : " + isbn);
-                System.out.println("Titre    : " + titre);
-                System.out.println("Auteur   : " + auteur);
-                System.out.println("Quantite : " + quantite);
+                System.out.println("  ISBN     : " + isbn);
+                System.out.println("  Titre    : " + titre);
+                System.out.println("  Auteur   : " + auteur);
+                System.out.println("  Quantite : " + quantite);
                 System.out.println();
             }
 

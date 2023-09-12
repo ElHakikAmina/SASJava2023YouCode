@@ -96,18 +96,6 @@ public class Biblio {
     	
     	
     	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
     	System.out.print("\n"); 
     	System.out.println(ConsoleColors.CYAN+"               /*------------------------------------------------------------------------*/"+ConsoleColors.RESET);
         String texte = "BIBLIOTHEQUE MUNICIPALE DE PARIS ";
@@ -183,7 +171,7 @@ public class Biblio {
         	 }
         		 
         	 afficherMenu(); 
-             System.out.println("donner votre choix: ");
+             System.out.println("\n\n                                           Donner votre choix: ");
              choix=scanner.nextLine();
          }
          System.out.println("\n\n                    Bye! Fermez Le consol.\n\n");
