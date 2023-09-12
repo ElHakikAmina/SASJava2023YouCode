@@ -28,8 +28,15 @@ public class Biblio {
     }
     public static void main(String[] args) throws InterruptedException  {
     	
+    	
+        
+    	
+    	
+    	
+    	
+    	
     	System.out.print("\n"); 
-    	System.out.println("               /*------------------------------------------------------------------------*/");
+    	System.out.println(ConsoleColors.YELLOW+"               /*------------------------------------------------------------------------*/"+ConsoleColors.RESET);
         String texte = "BIBLIOTHEQUE MUNICIPALE DE PARIS ";
         System.out.print("\n");
         System.out.print("                                     ");
@@ -39,9 +46,9 @@ public class Biblio {
         }
         System.out.print("\n");
         System.out.print("\n");
-        System.out.println("               /*-------------------- Un Projet de SAS YouCode Java ---------------------*/");
-        System.out.println("               /*-------------------- Réalisé par : EL HAKIK Amina ----------------------*/");
-        System.out.println("               /*------------------------------------------------------------------------*/");
+        System.out.println(ConsoleColors.YELLOW+"               /*-------------------- "+ConsoleColors.RESET+"Un Projet de SAS YouCode Java"+ConsoleColors.YELLOW+" ---------------------*/"+ConsoleColors.RESET);
+        System.out.println(ConsoleColors.YELLOW+"               /*-------------------- "+ConsoleColors.RESET+"Réalisé par : EL HAKIK Amina"+ConsoleColors.YELLOW+" ----------------------*/"+ConsoleColors.RESET);
+        System.out.println(ConsoleColors.YELLOW+"               /*------------------------------------------------------------------------*/"+ConsoleColors.RESET);
         System.out.println(); // Aller à la ligne après l'affichage complet
     
      
@@ -100,13 +107,13 @@ public class Biblio {
 
              try {
                  if (Login.verifyPassword(inputPassword)) {
-                     System.out.println("Mot de passe correct. Accès autorisé.");
+                     System.out.println(ConsoleColors.GREEN +"Mot de passe correct. Accès autorisé."+ ConsoleColors.RESET);
                      break; // Sortez de la boucle si le mot de passe est correct.
                  } else {
-                     System.out.println("Mot de passe incorrect. Veuillez réessayer.");
+                     System.out.println(ConsoleColors.RED +"Mot de passe incorrect. Veuillez réessayer."+ ConsoleColors.RESET);
                  }
              } catch (IOException e) {
-                 System.err.println("Une erreur s'est produite lors de la vérification du mot de passe.");
+                 System.err.println(ConsoleColors.RED +"Une erreur s'est produite lors de la vérification du mot de passe."+ ConsoleColors.RESET);
                  break; // Sortez de la boucle en cas d'erreur.
              }
          }
