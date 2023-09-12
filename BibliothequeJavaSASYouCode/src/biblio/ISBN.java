@@ -91,11 +91,7 @@ public class ISBN {
 	          
 	            return true;
 	        } else {
-	        	//if(isbn.equals("Q")) System.out.println("Modification quittée");
-	        	//else System.out.println("Le livre avec l'ISBN " + isbn + " n'existe pas.");
-
-	            
-	            //ConnexionDB.fermerConnexion(connexion);
+	        	
 	            return false;
 	        }
 	    } catch (SQLException e) {
@@ -118,9 +114,9 @@ public class ISBN {
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Le livre a été ajouté avec succès.");
+                System.out.println(ConsoleColors.GREEN+"Le livre a été ajouté avec succès."+ ConsoleColors.RESET);
             } else {
-                System.out.println("Erreur lors de l'ajout du livre.");
+                System.out.println(ConsoleColors.RED+"Erreur lors de l'ajout du livre."+ ConsoleColors.RESET);
             }
         } catch (SQLException e) {
             e.printStackTrace();

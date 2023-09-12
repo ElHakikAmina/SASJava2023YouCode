@@ -172,7 +172,7 @@ public class EmpruntLivre {
 	             // Insérer les informations dans la table emprunt_livre
 	                try {          
 	                    	isbnClasse.rendreStatusDispo(livre_ISBN);
-	                        System.out.println("L'emprunt a été enregistré avec succès.");
+	                        System.out.println(ConsoleColors.GREEN+"L'emprunt a été enregistré avec succès."+ ConsoleColors.RESET);
 	                   
 	                } catch (SQLException e) {
 	                    e.printStackTrace();
@@ -180,11 +180,11 @@ public class EmpruntLivre {
 	                /////////////////////////
 				 
 			 }else {
-				 System.out.println("ISBN est déjà retourné");
+				 System.out.println(ConsoleColors.RED+"ISBN est déjà retourné"+ ConsoleColors.RESET);
 			 }
 		 }else
 		 {
-			 System.out.println("ISBN n'existe pas");
+			 System.out.println(ConsoleColors.RED+"ISBN n'existe pas"+ ConsoleColors.RESET);
 		 }
 	 }	 
 	 ////////////////////////
@@ -211,7 +211,7 @@ public class EmpruntLivre {
 				 
 				 if(idEmprunteur==-1)
 				 {
-				        System.out.println("Aucun emprunteur avec ce numéro de téléphone n'a été trouvé.");
+				        System.out.println(ConsoleColors.RED+"Aucun emprunteur avec ce numéro de téléphone n'a été trouvé."+ ConsoleColors.RESET);
 
 				 }else
 				 {
@@ -240,9 +240,9 @@ public class EmpruntLivre {
 
 		                    if (lignesAffectees > 0) {
 		                    	isbnClasse.rendreStatusNonDispo(livre_ISBN);
-		                        System.out.println("L'emprunt a été enregistré avec succès.");
+		                        System.out.println(ConsoleColors.GREEN+"L'emprunt a été enregistré avec succès."+ ConsoleColors.RESET);
 		                    } else {
-		                        System.out.println("L'enregistrement de l'emprunt a échoué.");
+		                        System.out.println(ConsoleColors.RED+"L'enregistrement de l'emprunt a échoué."+ ConsoleColors.RESET);
 		                    }
 
 		                    preparedStatement.close();
@@ -254,12 +254,12 @@ public class EmpruntLivre {
 				 
 				 }
 			 }else {
-				 System.out.println("ISBN n'est pas disponible");
+				 System.out.println(ConsoleColors.RED+"ISBN n'est pas disponible"+ ConsoleColors.RESET);
 			 }
 			 
 		 }else
 		 {
-			 System.out.println("ISBN n'existe pas");
+			 System.out.println(ConsoleColors.RED+"ISBN n'existe pas"+ ConsoleColors.RESET);
 		 }
 	 }
 	 

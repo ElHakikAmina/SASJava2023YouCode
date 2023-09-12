@@ -454,7 +454,6 @@ public class Livre {
                 System.out.println();
             }
 
-           // ConnexionDB.fermerConnexion(connexion);
         
         } catch (SQLException e) {
             e.printStackTrace();
@@ -465,7 +464,6 @@ public class Livre {
 	
 	public static  void afficherTousLesLivresEmprunte() {
         try {
-            //Connection connexion = ConnexionDB.seConnecterDB();
             String query = "SELECT * FROM isbn i INNER JOIN livre l on i.id_livre =l.id where status ='0'"; 
 
             
@@ -488,7 +486,6 @@ public class Livre {
                 System.out.println();
             }
 
-           // ConnexionDB.fermerConnexion(connexion);
         
         } catch (SQLException e) {
             e.printStackTrace();
@@ -518,10 +515,10 @@ public class Livre {
             }
             
             if (rowsInserted > 0) {
-                System.out.println("Le livre a été ajouté avec succès.");
+                System.out.println(ConsoleColors.GREEN+"Le livre a été ajouté avec succès."+ ConsoleColors.RESET);
                 
             } else {
-                System.out.println("Erreur lors de l'ajout du livre.");
+                System.out.println(ConsoleColors.RED+"Erreur lors de l'ajout du livre."+ ConsoleColors.RESET);
             }
         } catch (SQLException e) {
             e.printStackTrace();
