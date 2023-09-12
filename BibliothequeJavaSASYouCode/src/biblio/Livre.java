@@ -156,19 +156,14 @@ public class Livre {
  
  
  
- public void miseAJourQuantiteLivre(String isbn, int nouvelleQuantite) {
-	    Connection connexion = null;
-	    PreparedStatement preparedStatement = null;
+ public void decrementerQuantiteLivre(String isbn) {
 
 	    try {
-	        //connexion = ConnexionDB.seConnecterDB();
 
-	        
-	        String query = "UPDATE livre SET quantite = ? WHERE ISBN = ?";
+	        String query = "UPDATE livre SET quantite = quantite - 1 WHERE id IN (SELECT id_livre FROM isbn WHERE ISBN = ?)";
 
-	        preparedStatement = connexion.prepareStatement(query);
-	        preparedStatement.setInt(1, nouvelleQuantite);
-	        preparedStatement.setString(2, isbn);
+	        PreparedStatement preparedStatement = connexion.prepareStatement(query);
+	        preparedStatement.setString(1, isbn);
 
 	        int rowsUpdated = preparedStatement.executeUpdate();
 
@@ -179,19 +174,7 @@ public class Livre {
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	    } finally {
-	        
-	        if (preparedStatement != null) {
-	            try {
-	                preparedStatement.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        /*if (connexion != null) {
-	            ConnexionBDD.fermerConnexion(connexion);
-	        }*/
-	    }
+	    } 
 	}
 
  public void rechercherLivreParISBN(String isbn) {
@@ -345,31 +328,55 @@ public class Livre {
     }
 		
 }
+	//
 	
-	
+	public static boolean isbnExistDansEmpruntLivre(String isbn) {
+        try  {
+            String query = "SELECT COUNT(*) FROM emprunt_livre WHERE livre_ISBN = ?";
+            PreparedStatement preparedStatement = connexion.prepareStatement(query);
+            preparedStatement.setString(1, isbn);
+            ResultSet resultSet = preparedStatement.executeQuery();
+                    if (resultSet.next()) {
+                        int count = resultSet.getInt(1);
+                        return count > 0;
+                    
+                    }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 	 
-	
-	 public void supprimerLivre(String isbn) {
-		 String confirmation;
-		 System.out.println("Etes vous sur de vouloir supprimer le livre ISBN = "+isbn);
-		 System.out.println("yes/non ** [ ATTENTION CETTE ETAPE EST IRREVERSIBLE] **");
-		 confirmation = scanner.nextLine();
-		 if (!confirmation.equals("yes")) System.out.println("supprission annulé");
-		 else if(confirmation.equals("yes"))
-		 try {
-			 //Connection connection = ConnexionDB.seConnecterDB();
-			 String query = "DELETE FROM livre WHERE ISBN= ? ";
-			 PreparedStatement preparedStatement= connection.prepareStatement(query);
-			  preparedStatement.setString(1,isbn);
-			  
-			  preparedStatement.executeUpdate();
-			  System.out.println("le livre avec ISBN ="+isbn+" a bien été suprimé");
-		 }catch (SQLException e){
-			 e.printStackTrace();
+	//
+	 public void supprimerLivre() {
+		 String isbn;
+		 System.out.println("donner le ISBN à supprimer : ");
+		 isbn = scanner.nextLine();
+		 if(!Livre.isbnExistDansEmpruntLivre(isbn))
+		 {
+			 String confirmation;
+			 System.out.println("Etes vous sur de vouloir supprimer le livre ISBN = "+isbn);
+			 System.out.println("yes/non ** [ ATTENTION CETTE ETAPE EST IRREVERSIBLE] **");
+			 confirmation = scanner.nextLine();
+			 if (!confirmation.equals("yes")) System.out.println("supprission annulé");
+			 else if(confirmation.equals("yes"))
+			 try {
+				 
+				 String query = "DELETE FROM isbn WHERE ISBN= ? ";
+				 PreparedStatement preparedStatement= connexion.prepareStatement(query);
+				  preparedStatement.setString(1,isbn);
+				  
+				  preparedStatement.executeUpdate();
+				  System.out.println("le livre avec ISBN ="+isbn+" a bien été suprimé");
+				  decrementerQuantiteLivre(isbn);
+			 }catch (SQLException e){
+				 e.printStackTrace();
+			 }	  
+		 }else {
+			 System.out.println("le livre est deja emprunté");
 		 }
 		 
-		
-		  
 	 }
 	 
 	 

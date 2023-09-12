@@ -22,6 +22,7 @@ public class Biblio {
         System.out.println("               |       10. Statistique                             |");
         System.out.println("               |       11. Afficher tous les emprunteur            |");
         System.out.println("               |       12. Afficher les emprunteur en retard       |");
+        System.out.println("               |       13. Ajouter un emprunteur                   |");
         System.out.println("               |       0. Quitter                                  |");
         System.out.println("               |---------------------------------------------------|");
     }
@@ -82,7 +83,7 @@ public class Biblio {
     	//dataFile.generateStatisticsToFile();
     	Livre livre = new Livre ();
     	EmpruntLivre empruntLivre = new EmpruntLivre();
-    	System.out.println(empruntLivre.totalNombreEmprunteur());
+    	//System.out.println(empruntLivre.totalNombreEmprunteur());
     	//System.out.println(livre.rechercherLivreParISBN("1khf"));
     	// String pwd="1234";
          Scanner scanner = new Scanner(System.in); 
@@ -137,12 +138,14 @@ public class Biblio {
         	 case "4":empruntLivre.empruntterLivre();break;
         	 case "5":empruntLivre.retournerLivre();break;
         	 case "6":Livre.afficherTousLesLivresEmprunte();break;
-        	 case "7":livre.supprimerLivre("1");break;
+        	 case "7":livre.supprimerLivre();break;
         	 case "8":livre.modifierInfoLivre();break;
         	 case "9":empruntLivre.livrePerdus();break;
         	 case "10":empruntLivre.statistiques();break;
         	 case "11":emprunteur.afficherTousLesEmprunteurs();break;
         	 case "12":emprunteur.afficherEmprunteurEnRetard();break;
+        	 case "13":emprunteur.ajoutEmprunteur();break;
+        	 
         	 
         	 /*
         	 

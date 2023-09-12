@@ -22,17 +22,8 @@ public class EmpruntLivre {
 	 private Emprunteur emprunteur = new Emprunteur();
 	 
 	 private static Scanner scanner = new Scanner(System.in);
-	///////////////////////////	 
-	 public  int totalNombreEmprunteur()
-	 {
-		// Nombre total d'emprunteurs
-         String requeteEmprunteurs = "SELECT COUNT(*) AS totalEmprunteurs FROM emprunteur";
-         PreparedStatement preparedStatementEmprunteurs = connexion.prepareStatement(requeteEmprunteurs);
-         ResultSet resultSetEmprunteurs = preparedStatementEmprunteurs.executeQuery();
-         resultSetEmprunteurs.next();
-         return totalEmprunteurs = resultSetEmprunteurs.getInt("totalEmprunteurs");
-
-	 }
+		 
+	
 	///////////////////////////
 	 public void statistiques() {
 	        Connection connexion = ConnexionDB.getInstance().getConnexion();
