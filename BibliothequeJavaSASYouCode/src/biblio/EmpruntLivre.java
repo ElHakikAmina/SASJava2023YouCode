@@ -131,7 +131,14 @@ public class EmpruntLivre {
 
 	            int nombreTotalLivresPerdus = 0;
 
-	            System.out.println("Livres perdus :");
+	            //System.out.println("Livres perdus :");
+	            System.out.println(ConsoleColors.RED +"        ----------------------------------------------------------------------"+ConsoleColors.RESET);
+	            System.out.println(ConsoleColors.RED +"       |"+ConsoleColors.RESET+ConsoleColors.BACKGROUND_RED+" Les informations de tous les livres qui ont dépassé la date de retour "+ConsoleColors.RESET1234+ConsoleColors.RED +"|"+ConsoleColors.RESET);
+	            System.out.println(ConsoleColors.RED +"        ----------------------------------------------------------------------"+ConsoleColors.RESET);
+
+	            
+	            
+	            
 	            while (resultSet.next()) {
 	                String titre = resultSet.getString("titre");
 	                String auteur = resultSet.getString("auteur");

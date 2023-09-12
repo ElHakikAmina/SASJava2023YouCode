@@ -51,6 +51,14 @@ public class Biblio {
 	   	 }
 	}
     public static void main(String[] args) throws InterruptedException  {
+    	System.out.print(ConsoleColors.CYAN);
+    	System.out.println();
+    	System.out.println("                                  BBBBB   IIIII  BBBBB   L     IIIII  OOO");
+    	System.out.println("                                  B    B    I    B    B  L       I   O   O");
+    	System.out.println("                                  BBBBB     I    BBBBB   L       I   O   O");
+    	System.out.println("                                  B    B    I    B    B  L       I   O   O");
+    	System.out.println("                                  BBBBB   IIIII  BBBBB   LLLLL IIIII  OOO");
+    	System.out.print(ConsoleColors.RESET);
     	/*
     
     	        System.out.println(ConsoleColors.RESET + "Texte en couleur par défaut");
@@ -96,8 +104,8 @@ public class Biblio {
     	
     	
     	
-    	System.out.print("\n"); 
-    	System.out.println(ConsoleColors.CYAN+"               /*------------------------------------------------------------------------*/"+ConsoleColors.RESET);
+    	//System.out.print("\n"); 
+    	//System.out.println(ConsoleColors.CYAN+"               /*------------------------------------------------------------------------*/"+ConsoleColors.RESET);
         String texte = "BIBLIOTHEQUE MUNICIPALE DE PARIS ";
         System.out.print("\n");
         System.out.print("                                     ");
