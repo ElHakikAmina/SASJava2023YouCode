@@ -132,7 +132,7 @@ public class Biblio {
          }*/
          String choix;
          afficherMenu(); 
-         System.out.println("\n   donner votre choix: ");
+         System.out.println("\n\n                                           Donner votre choix: ");
          choix=scanner.nextLine();
          while(!choix.equals("0"))
          {

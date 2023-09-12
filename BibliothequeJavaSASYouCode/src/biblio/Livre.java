@@ -142,19 +142,8 @@ public class Livre {
 		 }
 	 }
 	
-	 // 
-	 /*try {
-		 Connection connexion = 
-	 }catch(SQLException e)
-	 {
-		 e.printStackTrace();
-	 }*/
+	
  }
- 
- 
- 
- 
- 
  
  public void decrementerQuantiteLivre(String isbn) {
 
@@ -179,7 +168,7 @@ public class Livre {
 
  public void rechercherLivreParISBN(String isbn) {
 	    try {
-	        //Connection connexion = ConnexionDB.seConnecterDB();
+	        
 	        String query = "SELECT * from isbn i INNER JOIN livre l ON i.id_livre = l.id where i.ISBN = ? ";
 	        PreparedStatement preparedStatement = connexion.prepareStatement(query);
 	        preparedStatement.setString(1, isbn);
@@ -408,7 +397,7 @@ public class Livre {
             }
         }
         ajouterLivre(titre,auteur,quantite);
-        // Demander l'ISBN quantité fois
+        
         for (int i = 0; i < Integer.parseInt(quantite); i++) {
         	System.out.println("Saisissez l'ISBN du livre " + (i + 1) + " : ");
             String isbn = scanner.nextLine();
@@ -419,19 +408,16 @@ public class Livre {
         	}
             
             isbnClasse.ajouterISBN(isbn,"1",this.id);
-            // Faites quelque chose avec l'ISBN (par exemple, ajouter à une liste ou à la base de données)
+            
         }
         
-        
-        
-      
 	}
 	
 	//
 	
 	public static  void afficherTousLesLivresDisponible() {
         try {
-            //Connection connexion = ConnexionDB.seConnecterDB();
+            
             String query = "SELECT * FROM isbn i INNER JOIN livre l on i.id_livre =l.id where status ='1'"; 
 
             
@@ -500,7 +486,7 @@ public class Livre {
             String query = "INSERT INTO livre ( titre, auteur, quantite) VALUES ( ?, ?, ?)";
 
             PreparedStatement preparedStatement = connexion.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-            //preparedStatement.setString(1, ISBN);
+            
             preparedStatement.setString(1, titre);
             preparedStatement.setString(2, auteur);
             preparedStatement.setString(3, quantite);
@@ -510,7 +496,7 @@ public class Livre {
             
             if (resultSet.next()) {
                 int lastInsertedID = resultSet.getInt(1);
-                //System.out.println("Last Inserted ID: " + lastInsertedID);
+                
                 this.id=lastInsertedID;
             }
             
@@ -526,11 +512,4 @@ public class Livre {
         
     }
 
-	
-	
-	
-	
-	
-	
-	
 }
