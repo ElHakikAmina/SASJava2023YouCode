@@ -390,7 +390,7 @@ public class Livre {
                 break;
             } else if (estFloat(quantiteStr)) {
                 // Vérifier si la quantité est un float (nombre à virgule flottante)
-                System.out.println(ConsoleColors.RED+"La quantité ne peut pas être un nombre à virgule flottante. Veuillez réessayer."+ ConsoleColors.RESET);
+                System.out.println(ConsoleColors.BACKGROUND_RED +"La quantité ne peut pas être un nombre à virgule flottante. Veuillez réessayer."+ ConsoleColors.RESET);
             } else {
                 // La quantité n'est ni un entier ni un float
                 System.out.println(ConsoleColors.RED+"La quantité doit être un nombre entier. Veuillez réessayer."+ ConsoleColors.RESET);
