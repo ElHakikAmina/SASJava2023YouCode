@@ -1,3 +1,108 @@
+ -- create  database bibliotheque;
+
+use bibliotheque;
+
+create table  emprunt_livre(
+id int primary key auto_increment,
+livre_ISBN varchar(255),
+id_emprunteur int,
+Date_emprunt date,
+Date_retour date,
+FOREIGN KEY (id_emprunteur) REFERENCES emprunteur(id),
+FOREIGN KEY (livre_ISBN) REFERENCES isbn(ISBN)
+);
+-- Création de la table "isbn"
+ create table emprunteur (
+ id int primary key auto_increment,
+ nom_complet varchar (255),
+ numTel varchar (255),
+ adresse varchar (255)
+ );
+create table livre (
+id int primary key auto_increment,
+titre varchar (255),
+auteur varchar (255),
+quantite varchar (255) 
+);
+
+ALTER TABLE livre
+MODIFY COLUMN quantite VARCHAR(255);
+
+CREATE TABLE isbn (
+    ISBN VARCHAR(255) PRIMARY KEY,
+    status VARCHAR(255),
+    id_livre INT,
+    FOREIGN KEY (id_livre) REFERENCES livre(id)
+);
+select * from emprunt_livre;
+
+select * from isbn;
+
+ALTER TABLE emprunt_livre
+ADD FOREIGN KEY (id_emprunteur) REFERENCES emprunteur(id) ON DELETE CASCADE,
+ADD FOREIGN KEY (livre_ISBN) REFERENCES isbn(ISBN) ON DELETE CASCADE;
+
+ALTER TABLE isbn
+ADD FOREIGN KEY (id_livre) REFERENCES livre(id) ON DELETE CASCADE;
+
+ALTER TABLE emprunt_livre
+ADD FOREIGN KEY (livre_ISBN) REFERENCES isbn(ISBN) ON DELETE CASCADE;
+
+ALTER TABLE emprunt_livre
+ADD FOREIGN KEY (livre_ISBN) REFERENCES isbn(ISBN) ON DELETE CASCADE;
+
+select * from isbn where ISBN ='2';
+
+select * from isbn;
+select * from livre;
+select * from emprunt_livre;
+
+UPDATE livre SET quantite = quantite - 1 WHERE id IN (SELECT id_livre FROM isbn WHERE ISBN = 'isbn3');
+
+
+
+
+select * from isbn;
+
+DELIMITER //
+CREATE TRIGGER after_insert_emprunt_livre
+AFTER INSERT ON emprunt_livre
+FOR EACH ROW
+BEGIN
+  -- Mettre à jour la quantité disponible du livre dans la table "livre"
+  UPDATE livre
+  SET quantite = quantite - 1
+  WHERE id = (SELECT id_livre FROM isbn WHERE ISBN = NEW.livre_ISBN);
+END;
+//
+DELIMITER ;
+
+select * from emprunteurnumTel;
+
+ALTER TABLE emprunteur
+MODIFY COLUMN numTel VARCHAR(20); 
+
+DELIMITER //
+
+CREATE TRIGGER after_update_isbn_status
+AFTER UPDATE ON isbn
+FOR EACH ROW
+BEGIN
+    IF NEW.status = '1' AND OLD.status = '0' THEN
+        -- Incrémente la quantité du livre lorsque le statut passe de 0 à 1
+        UPDATE livre
+        SET quantite = quantite + 1
+        WHERE id = NEW.id_livre;
+    END IF;
+END;
+//
+DELIMITER ;
+ select * from emprunt_livre;
+
+
+
+
+
 DELIMITER //
 
 CREATE TRIGGER after_update_isbn_status
